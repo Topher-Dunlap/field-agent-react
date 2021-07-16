@@ -7,12 +7,16 @@ export default function NavListLinks(props) {
     const routeName = props.routeName;
     const routePath = props.routePath;
 
+    function isExact() {
+        if (routePath !== "/") {
+            return <Link to={routePath}>{routeName}</Link>
+        }
+        return <Link exact to={routePath}>{routeName}</Link>
+    }
+
     return (
         <li>
-            <Link
-                to={routePath}>
-                {routeName}
-            </Link>
+            {isExact()}
             <hr/>
         </li>
     )

@@ -2,7 +2,6 @@ import NavListLinks from "./NavListLinks";
 import React from "react";
 
 export default function Nav() {
-
     ///Map the Nav Links with data from filterOptions
     const navRoutes = navOptions.map((routeData, idx) =>
         <NavListLinks
@@ -21,12 +20,11 @@ export default function Nav() {
     )
 }
 
-
 //data used to populate nav Links
 const navOptions = [
     {
         routeName: "Home",
-        routePath: "//"
+        routePath: "/"
     },
     {
         routeName: "Login",
