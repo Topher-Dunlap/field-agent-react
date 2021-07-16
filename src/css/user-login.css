@@ -1,0 +1,78 @@
+.wrapper {
+    height: 25vh;
+    /*This part is important for centering*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.typing-demo {
+    width: 10ch;
+    animation: typing 1.1s steps(20), blink .5s step-end infinite alternate;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 3px solid;
+    font-family: monospace;
+    font-size: 1.50rem;
+    color: black;
+}
+
+@keyframes typing {
+    from {
+        width: 0
+    }
+}
+
+@keyframes blink {
+    50% {
+        border-color: transparent
+    }
+}
+
+nav {
+    background-color: #333333;
+}
+
+nav > ul {
+    margin: 1rem;
+    padding-left: 1em;
+    display: flex;
+    margin: 2rem;
+    padding-left: 0;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+nav > ul > li {
+    padding: 0.4rem;
+    list-style-type: none;
+    background-color: #333;
+}
+
+nav > ul > li > a {
+    border-radius: 25px;
+    color: #333333;
+}
+
+
+
+/* mobile screens */
+@media screen and (max-width: 768px) {
+    nav {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    nav > nav {
+        margin: 0 0 3rem 0;
+    }
+
+    .sideNavList {
+        text-align: center;
+        background-color: #AAAAAA;
+    }
+}
+

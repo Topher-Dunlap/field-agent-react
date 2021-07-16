@@ -1,0 +1,199 @@
+.wrapper {
+    height: 25vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.typing-demo {
+    width: 13ch;
+    animation: typing 1s steps(15), blink .5s step-end infinite alternate;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 3px solid;
+    font-family: monospace;
+    font-size: 1.30rem;
+    color: black;
+}
+
+@keyframes typing {
+    from {
+        width: 0
+    }
+}
+
+@keyframes blink {
+    50% {
+        border-color: transparent
+    }
+}
+
+.hrDivTop {
+    width: 20%;
+    margin: 2rem 0 3rem 0;
+}
+
+.mainImgDiv {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.cards {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.card {
+    background-color: #666;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    margin: 1.5rem;
+}
+
+.cardHeader {
+    color: #CFD11A;
+    border-radius: 10px 10px 0 0;
+    padding: 1.5rem;
+    font-size: 1.25rem;
+    margin: 0;
+    background-color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+}
+
+.cardMain {
+    padding: 1rem;
+}
+
+.card > .cardMain > div > hr {
+    border-color: #CFD11A;
+}
+
+.card > .cardMain > div > img {
+    width: 75%;
+}
+
+.card > .cardMain > ul > ul {
+    margin-top: 0;
+    color: white;
+}
+
+.card > .cardMain > ul > li {
+    margin: 0;
+    color: white;
+    list-style: none;
+}
+
+.card > .cardMain > p {
+    font-size: 1.25rem;
+    line-height: 1rem;
+    margin: 1rem 0;
+    text-align: center;
+}
+
+.cardFooter {
+    background-color: #333;
+    color: #fff;
+    border-radius: 0 0 10px 10px;
+    padding: 1rem;
+    font-size: 0.8rem;
+    display: flex;
+    justify-content: center;
+    list-style: none;
+}
+
+.cardFooter > p {
+    margin: 0 4rem;
+    font-family: Helvetica, sans-serif;
+    font-size: 2rem;
+}
+
+.cardFooter > p > a{
+    color: #CFD11A;
+    text-decoration: none;
+}
+
+.cardLabel {
+    font-weight: bold;
+    color: #CFD11A;
+}
+
+main > section {
+    width: 60%;
+    max-width: 960px;
+    margin: auto;
+    padding: 0.5rem 2rem;
+}
+
+nav {
+    background-color: #333333;
+}
+
+nav > ul {
+    margin: 1rem;
+    padding-left: 1em;
+    display: flex;
+    margin: 2rem;
+    padding-left: 0;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+nav > ul > li {
+    padding: 0.4rem;
+    list-style-type: none;
+    background-color: #333;
+}
+
+nav > ul > li > a {
+    border-radius: 25px;
+    color: #333333;
+}
+
+/* mobile screens */
+@media screen and (max-width: 768px) {
+
+    .cards {
+        display: grid;
+        /* define the number of grid columns */
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    header {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    header > h1 {
+        margin: 4rem 0;
+        color: white;
+    }
+
+    .sideNavList {
+        text-align: center;
+        background-color: #AAAAAA;
+    }
+}
+
+/* desktop screens */
+@media screen and (min-width: 769px) {
+    .cards {
+        display: grid;
+        /* define the number of grid columns */
+        grid-template-columns: repeat(2, 1fr);
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+}
+
+
