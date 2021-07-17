@@ -132,31 +132,31 @@ main > section {
     padding: 0.5rem 2rem;
 }
 
-nav {
-    background-color: #333333;
-}
+/*nav {*/
+/*    background-color: #333333;*/
+/*}*/
 
-nav > ul {
-    margin: 1rem;
-    padding-left: 1em;
-    display: flex;
-    margin: 2rem;
-    padding-left: 0;
-    display: flex;
-    justify-content: center;
-    align-content: center;
-}
+/*nav > ul {*/
+/*    margin: 1rem;*/
+/*    padding-left: 1em;*/
+/*    display: flex;*/
+/*    margin: 2rem;*/
+/*    padding-left: 0;*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-content: center;*/
+/*}*/
 
-nav > ul > li {
-    padding: 0.4rem;
-    list-style-type: none;
-    background-color: #333;
-}
+/*nav > ul > li {*/
+/*    padding: 0.4rem;*/
+/*    list-style-type: none;*/
+/*    background-color: #333;*/
+/*}*/
 
-nav > ul > li > a {
-    border-radius: 25px;
-    color: #333333;
-}
+/*nav > ul > li > a {*/
+/*    border-radius: 25px;*/
+/*    color: #333333;*/
+/*}*/
 
 /* mobile screens */
 @media screen and (max-width: 768px) {
@@ -195,5 +195,6 @@ nav > ul > li > a {
         flex-wrap: wrap;
     }
 }
+
 
 

@@ -7,7 +7,7 @@ import './css/main.css';
 
 function App() {
   return (
-      <div>
+      <>
           <header>
               <Nav/>
           </header>
@@ -15,7 +15,7 @@ function App() {
               <SwitchNavRoutes/>
           </ErrorBoundary>
           <Footer/>
-      </div>
+      </>
   );
 }
 

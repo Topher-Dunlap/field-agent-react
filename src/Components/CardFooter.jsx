@@ -1,14 +1,23 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
+import EditAgent from './EditAgent';
+import DeleteAgent from './DeleteAgent';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons'
 
 export default function CardFooter() {
     return (
         <div className="cardFooter">
             <p>
-                <a href="edit-agent.html" className="fa fa-edit">Edit</a>
+                <Link to={EditAgent} className="fa fa-edit">
+                    <FontAwesomeIcon icon={faEdit} />
+                </Link>
             </p>
             <hr/>
             <p>
-                <a href="delete-agent.html" className="fa fa-trash">Delete</a>
+                <Link to={DeleteAgent} className="fa fa-trash">
+                    <FontAwesomeIcon icon={faTrash} />
+                </Link>
             </p>
         </div>
     )
