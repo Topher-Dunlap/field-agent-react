@@ -1,5 +1,8 @@
-import NavListLinks from "./NavListLinks";
 import React from "react";
+import NavListLinks from "./NavListLinks";
+import NavListIconLinks from './NavListIconLinks';
+import '../css/nav.css';
+import {faHome, faUserSecret} from "@fortawesome/free-solid-svg-icons";
 
 export default function Nav() {
     ///Map the Nav Links with data from filterOptions
@@ -11,9 +14,21 @@ export default function Nav() {
         />
     )
 
+    ///Map the Nav Links with data from filterOptions
+    const navRouteIcons = navRouteIconOptions.map((routeData, idx) =>
+        <NavListIconLinks
+            key={idx}
+            iconClass={routeData.iconClass}
+            icon={routeData.icon}
+            routeName={routeData.routeName}
+            routePath={routeData.routePath}
+        />
+    )
+
     return(
         <nav className="topNav">
             <ul>
+                {navRouteIcons}
                 {navRoutes}
             </ul>
         </nav>
@@ -23,10 +38,6 @@ export default function Nav() {
 //data used to populate nav Links
 const navOptions = [
     {
-        routeName: "Home",
-        routePath: "/"
-    },
-    {
         routeName: "Login",
         routePath: "/login"
     },
@@ -34,8 +45,17 @@ const navOptions = [
         routeName: "Register",
         routePath: "/register"
     },
+]
+
+const navRouteIconOptions = [
     {
-        routeName: "Agents",
-        routePath: "/agents"
+        routePath: "/",
+        iconClass: "fa fa-home",
+        icon: faHome
+    },
+    {
+        routePath: "/agents",
+        iconClass: "fa fa-user-secret",
+        icon: faUserSecret,
     },
 ]

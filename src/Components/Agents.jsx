@@ -1,15 +1,13 @@
 import React from 'react';
 import AgentData from '../data';
 import AgentCard from "./AgentCard";
-import '../css/reset.css';
-import '../css/main.css';
 import '../css/agents.css';
 
 export default function Agents() {
     return (
         <main>
             <div className="wrapper">
-                <div className="typing-demo">
+                <div className="typing-demo-agent">
                     <h1>Agents.</h1>
                 </div>
             </div>

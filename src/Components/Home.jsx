@@ -1,9 +1,4 @@
 import React from 'react';
-import UserLogin from './UserLogin';
-import Registration from './Registration';
-import Agents from './Agents';
-import '../css/reset.css';
-import '../css/main.css';
 import '../css/home.css';
 
 export default function Home() {

@@ -3,6 +3,7 @@ import Nav from "./Components/Nav";
 import Footer from "./Components/Footer";
 import SwitchNavRoutes from "./Components/SwitchNavRoutes";
 import ErrorBoundary from "./Components/ErrorBoundary";
+import './css/reset.css';
 import './css/main.css';
 
 function App() {

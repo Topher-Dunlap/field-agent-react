@@ -60,7 +60,7 @@ header > ul {
 }
 
 header > nav > ul > li {
-    padding: 0.4rem;
+    /*padding: 0.4rem;*/
     list-style-type: none;
     background-color: #333;
 }
