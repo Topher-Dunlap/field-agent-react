@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import Registration from "./Registration";
 import UserLogin from "./UserLogin";
 import Agents from "./Agents";
+import EditAgent from "./EditAgent";
 import Home from "./Home";
 import NotFoundPage from "./NotFoundPage";
 
@@ -16,6 +17,10 @@ export default function SwitchNavRoutes() {
             <Route
                 path='/agents'
                 component={Agents}
+            />
+            <Route
+                path='/EditAgent'
+                component={EditAgent}
             />
             <Route
                 path='/login'
