@@ -14,8 +14,8 @@ export default function AddAgent() {
     const [lastName, setLastName] = useState('');
     const [dob, setDob] = useState('');
     const [height, setHeight] = useState('');
-    const [agency, setAgency] = useState('');
-    const [alias, setAlias] = useState('');
+    const [agencyShortName, setAgencyShortName] = useState('');
+    const [aliasName, setAliasName] = useState('');
     const [aliasPersona, setAliasPersona] = useState('');
 
     //for redirect after submit
@@ -34,10 +34,10 @@ export default function AddAgent() {
         setHeight(event.target.value);
     }
     const agencyOnChangeHandler = (event) => {
-        setAgency(event.target.value);
+        setAgencyShortName(event.target.value);
     }
     const aliasOnChangeHandler = (event) => {
-        setAlias(event.target.value);
+        setAliasName(event.target.value);
     }
     const aliasPersonaOnChangeHandler = (event) => {
         setAliasPersona(event.target.value);
@@ -53,9 +53,11 @@ export default function AddAgent() {
             lastName: lastName,
             dob: dob,
             height: height,
-            agency: agency,
-            alias: alias,
-            aliasPersona: aliasPersona
+            agencies: [{shortName: agencyShortName}],
+            aliases: [{
+                name: aliasName,
+                persona: aliasPersona
+            }],
         };
 
         setAgents([...agents, newAgent]);
@@ -65,8 +67,8 @@ export default function AddAgent() {
         setLastName('');
         setDob('');
         setHeight('');
-        setAgency('');
-        setAlias('');
+        setAgencyShortName('');
+        setAliasName('');
         setAliasPersona('');
 
         //direct back to agents page

@@ -18,7 +18,7 @@ export default function EditAgent() {
         setLastName(editAgent.lastName);
         setDob(editAgent.dob);
         setHeight(editAgent.height);
-        setAgencyName(editAgent.agencies[0].shortName);
+        setAgencyShortName(editAgent.agencies[0].shortName);
         setAliasName(editAgent.aliases[0].name);
         setAliasPersona(editAgent.aliases[0].persona);
     }, []);
@@ -28,7 +28,7 @@ export default function EditAgent() {
     const [lastName, setLastName] = useState('');
     const [dob, setDob] = useState('');
     const [height, setHeight] = useState('');
-    const [agencyName, setAgencyName] = useState('');
+    const [agencyShortName, setAgencyShortName] = useState('');
     const [aliasName, setAliasName] = useState('');
     const [aliasPersona, setAliasPersona] = useState('');
 
@@ -48,7 +48,7 @@ export default function EditAgent() {
         setHeight(event.target.value);
     }
     const agencyOnChangeHandler = (event) => {
-        setAgencyName(event.target.value);
+        setAgencyShortName(event.target.value);
     }
     const aliasOnChangeHandler = (event) => {
         setAliasName(event.target.value);
@@ -62,13 +62,15 @@ export default function EditAgent() {
 
         const newAgent = {
             agentId: agentToSelect,
-            firstName,
-            lastName,
-            dob,
-            height,
-            agencyName,
-            aliasName,
-            aliasPersona
+            firstName: firstName,
+            lastName: lastName,
+            dob: dob,
+            height: height,
+            agencies: [{shortName: agencyShortName}],
+            aliases: [{
+                name: aliasName,
+                persona: aliasPersona
+            }],
         };
 
         const newAgents = [...agents];
@@ -81,7 +83,7 @@ export default function EditAgent() {
         setLastName('');
         setDob('');
         setHeight('');
-        setAgencyName('');
+        setAgencyShortName('');
         setAliasName('');
         setAliasPersona('');
 
@@ -118,7 +120,7 @@ export default function EditAgent() {
                     <li>
                         <label>Agency</label>
                         <select name="field4" className="field-select" onChange={agencyOnChangeHandler}>
-                            <option value="default">{agencyName}</option>
+                            <option value="default">{agencyShortName}</option>
                             <option value="Partnership">CIA</option>
                             <option value="Partnership">Scotland Yard</option>
                             <option value="General Question">MI6</option>
