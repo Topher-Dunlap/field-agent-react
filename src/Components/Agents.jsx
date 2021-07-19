@@ -1,15 +1,18 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import AgentCard from "./AgentCard";
 import '../css/agents.css';
 import {Link} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlus} from "@fortawesome/free-solid-svg-icons";
 import AgentsContext from "./AgentsContext";
+import AgentData from "../data";
 
 export default function Agents() {
 
     const contextAgents = useContext(AgentsContext);
     let {agents, setAgents} = contextAgents.agents;
+
+    // const [agents, setAgents] = useState(AgentData);
 
     return (
         <main>
