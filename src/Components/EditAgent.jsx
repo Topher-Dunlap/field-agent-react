@@ -7,14 +7,12 @@ import SelectAgentContext from "./SelectAgentContext";
 import {useHistory} from "react-router-dom";
 
 export default function EditAgent() {
-
     ///context for agents
     const {agents, setAgents} = useContext(AgentsContext);
     const {agentToSelect, setAgentToSelect} = useContext(SelectAgentContext);
 
     useEffect(() => {
         const editAgent = agents.find(agent => agent.agentId === agentToSelect);
-
         // edit description and category state variables
         setFirstName(editAgent.firstName);
         setLastName(editAgent.lastName);

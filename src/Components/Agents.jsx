@@ -1,11 +1,10 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext} from 'react';
 import AgentCard from "./AgentCard";
 import '../css/agents.css';
 import {Link} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlus} from "@fortawesome/free-solid-svg-icons";
 import AgentsContext from "./AgentsContext";
-// import AgentData from "../data";
 
 export default function Agents() {
 
@@ -27,7 +26,7 @@ export default function Agents() {
             <section className={"cards"}>
                 {agents.map((agent, idx) => (
                     <AgentCard
-                        key={agent.id}
+                        key={idx}
                         agentId={agent.agentId}
                         firstName={agent.firstName}
                         lastName={agent.lastName}

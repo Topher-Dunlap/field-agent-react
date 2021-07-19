@@ -32,14 +32,14 @@ export default function SwitchNavRoutes() {
                 path='/delete_agent'
                 component={DeleteAgent}
             />
-            <Route
-                path='/login'
-                component={UserLogin}
-            />
-            <Route
-                path='/register'
-                component={Registration}
-            />
+            {/*<Route*/}
+            {/*    path='/login'*/}
+            {/*    component={UserLogin}*/}
+            {/*/>*/}
+            {/*<Route*/}
+            {/*    path='/register'*/}
+            {/*    component={Registration}*/}
+            {/*/>*/}
             <Route
                 component={NotFoundPage}
             />
