@@ -9,16 +9,9 @@ export default function NavListLinks(props) {
     const icon = props.icon;
     const routePath = props.routePath;
 
-    function isExact() {
-        if (routePath !== "/") {
-            return <Link to={routePath} className={iconClass}><FontAwesomeIcon icon={icon}/></Link>
-        }
-        return <Link exact to={routePath} className={iconClass}><FontAwesomeIcon icon={icon}/></Link>
-    }
-
     return (
         <li>
-            {isExact()}
+            <Link to={routePath} className={iconClass}><FontAwesomeIcon icon={icon}/></Link>
         </li>
     )
 }

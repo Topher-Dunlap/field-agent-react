@@ -9,7 +9,7 @@ export default function NavListLinks(props) {
 
     return (
         <li>
-            <Link exact to={routePath}>{routeName}</Link>
+            <Link to={routePath}>{routeName}</Link>
         </li>
     )
 }
