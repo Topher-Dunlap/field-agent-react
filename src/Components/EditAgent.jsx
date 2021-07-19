@@ -13,17 +13,17 @@ export default function EditAgent() {
     const {agentToSelect, setAgentToSelect} = useContext(SelectAgentContext);
 
     useEffect(() => {
-        console.log("agent selected: " + agentToSelect)
         const editAgent = agents.find(agent => agent.agentId === agentToSelect);
+        console.log("agent selected: " + editAgent.aliases)
 
         // edit description and category state variables
         setFirstName(editAgent.firstName);
         setLastName(editAgent.lastName);
         setDob(editAgent.dob);
         setHeight(editAgent.height);
-        setAgency(editAgent.agency);
-        setAlias(editAgent.alias);
-        setAliasPersona(editAgent.aliasPersona);
+        setAgencyName(editAgent.agencies[0].shortName);
+        setAliasName(editAgent.aliases[0].name);
+        setAliasPersona(editAgent.aliases[0].persona);
     }, []);
 
     ///state for form
@@ -31,8 +31,8 @@ export default function EditAgent() {
     const [lastName, setLastName] = useState('');
     const [dob, setDob] = useState('');
     const [height, setHeight] = useState('');
-    const [agency, setAgency] = useState('');
-    const [alias, setAlias] = useState('');
+    const [agencyName, setAgencyName] = useState('');
+    const [aliasName, setAliasName] = useState('');
     const [aliasPersona, setAliasPersona] = useState('');
 
     //for redirect after submit
@@ -51,10 +51,10 @@ export default function EditAgent() {
         setHeight(event.target.value);
     }
     const agencyOnChangeHandler = (event) => {
-        setAgency(event.target.value);
+        setAgencyName(event.target.value);
     }
     const aliasOnChangeHandler = (event) => {
-        setAlias(event.target.value);
+        setAliasName(event.target.value);
     }
     const aliasPersonaOnChangeHandler = (event) => {
         setAliasPersona(event.target.value);
@@ -69,8 +69,8 @@ export default function EditAgent() {
             lastName,
             dob,
             height,
-            agency,
-            alias,
+            agencyName,
+            aliasName,
             aliasPersona
         };
 
@@ -84,8 +84,8 @@ export default function EditAgent() {
         setLastName('');
         setDob('');
         setHeight('');
-        setAgency('');
-        setAlias('');
+        agencyName('');
+        setAliasName('');
         setAliasPersona('');
 
         //reset select agent state
@@ -121,7 +121,7 @@ export default function EditAgent() {
                     <li>
                         <label>Agency</label>
                         <select name="field4" className="field-select" onChange={agencyOnChangeHandler}>
-                            <option value="default">{agency}</option>
+                            <option value="default">{agencyName}</option>
                             <option value="Partnership">CIA</option>
                             <option value="Partnership">Scotland Yard</option>
                             <option value="General Question">MI6</option>
@@ -129,7 +129,7 @@ export default function EditAgent() {
                     </li>
                     <li>
                         <label>Alias Name</label>
-                        <input type="text" name="field6" className="field-divided" placeholder={alias} onChange={aliasOnChangeHandler}/>
+                        <input type="text" name="field6" className="field-divided" placeholder={aliasName} onChange={aliasOnChangeHandler}/>
                     </li>
                     <li>
                         <label>Alias Persona</label>
