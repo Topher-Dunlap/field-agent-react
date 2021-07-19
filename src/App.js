@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Nav from "./Components/Nav";
 import Footer from "./Components/Footer";
 import SwitchNavRoutes from "./Components/SwitchNavRoutes";

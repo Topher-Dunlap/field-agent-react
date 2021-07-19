@@ -13,6 +13,7 @@ export default function EditAgent() {
     const {agentToSelect, setAgentToSelect} = useContext(SelectAgentContext);
 
     useEffect(() => {
+        console.log("agent selected: " + agentToSelect)
         const editAgent = agents.find(agent => agent.agentId === agentToSelect);
 
         // edit description and category state variables

@@ -12,8 +12,6 @@ export default function Agents() {
     const contextAgents = useContext(AgentsContext);
     let {agents, setAgents} = contextAgents;
 
-    // const [agents, setAgents] = useState(AgentData);
-
     return (
         <main>
             <div className="wrapper">
@@ -30,7 +28,7 @@ export default function Agents() {
                 {agents.map((agent, idx) => (
                     <AgentCard
                         key={agent.id}
-                        agentId={agent.id}
+                        agentId={agent.agentId}
                         firstName={agent.firstName}
                         lastName={agent.lastName}
                         dob={agent.dob}

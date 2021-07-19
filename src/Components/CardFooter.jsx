@@ -11,7 +11,9 @@ export default function CardFooter({agentId}) {
 
     //update context with agentID to update
     function agentToSelectOnClick() {
+        debugger;
         setAgentToSelect(agentId)
+        console.log("AgentID Selected: " + agentId);
     }
 
     return (
