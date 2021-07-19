@@ -14,7 +14,6 @@ export default function DeleteAgent() {
 
     //agent to delete data
     const agentToDelete = agents.filter(agent => agent.agentId === agentToSelect);
-    console.log("agentToDelete: " + agentToDelete)
 
     //for redirect after submit
     let history = useHistory();
