@@ -6,7 +6,7 @@
     justify-content: center;
 }
 
-.typing-demo {
+.typing-demo-delete {
     width: 24ch;
     animation: typing 1.19s steps(22), blink .5s step-end infinite alternate;
     white-space: nowrap;
@@ -15,6 +15,10 @@
     font-family: monospace;
     font-size: 1.30rem;
     color: black;
+}
+
+.typing-demo-delete > h1 {
+    color: white;
 }
 
 @keyframes typing {
@@ -29,10 +33,6 @@
     }
 }
 
-.topNav {
-    background-color: #333333;
-}
-
 .bottomButtonDiv {
     padding: 0.4rem;
     border-radius: 25px;
@@ -40,54 +40,71 @@
 }
 
 .bottomButton {
-margin: .5rem
+    margin: .5rem
 }
 
-nav > ul {
+.bottomButtonDiv > div {
     margin: 1rem;
-    padding-left: 1em;
-    display: flex;
-    margin: 2rem;
-    padding-left: 0;
     display: flex;
     justify-content: center;
     align-content: center;
 }
 
-.topNav > ul > li {
-    padding: 0.4rem;
-    list-style-type: none;
-    background-color: #333;
-}
-
-nav > ul > li > a {
+.bottomButtonDiv > div > li > a {
     border-radius: 25px;
     color: #333333;
 }
 
+.deleteAgentButtons {
+    margin: 1rem;
+    display: flex;
+    justify-content: space-evenly;
+    align-content: center;
+}
+
+.cancelButton > a {
+    background-color: red;
+    padding: .5rem;
+    font-size: 1rem;
+    list-style-type: none;
+    border-radius: 25px;
+    color: white;
+    text-Decoration: none;
+    margin: 1rem .5rem;
+}
+
+.confirmButton > a {
+    padding: .5rem;
+    font-size: 1rem;
+    list-style-type: none;
+    background-color: lawngreen;
+    border-radius: 25px;
+    color: white;
+    text-Decoration: none;
+    margin: 1rem .5rem;
+}
+
+
 /* mobile screens */
 @media screen and (max-width: 768px) {
-    nav {
+    .bottomButtonDiv {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
     }
 
-    nav > nav {
-        margin: 0 0 3rem 0;
-    }
 }
 
 /* desktop screens */
 @media screen and (min-width: 769px) {
-    confirmDelete {
+    .confirmDelete {
         display: flex;
         justify-content: center;
         align-items: center;
     }
 
-    nav {
+    .bottomButtonDiv {
         display: flex;
         flex-direction: column;
         justify-content: center;

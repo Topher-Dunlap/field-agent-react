@@ -28,6 +28,10 @@
     }
 }
 
+.addButton {
+    padding: .5rem;
+}
+
 .hrDivTop {
     width: 20%;
     margin: 2rem 0 3rem 0;

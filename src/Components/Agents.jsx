@@ -1,9 +1,16 @@
-import React from 'react';
-import AgentData from '../data';
+import React, {useContext} from 'react';
 import AgentCard from "./AgentCard";
 import '../css/agents.css';
+import {Link} from "react-router-dom";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faPlus} from "@fortawesome/free-solid-svg-icons";
+import AgentsContext from "./AgentsContext";
 
 export default function Agents() {
+
+    const contextAgents = useContext(AgentsContext);
+    let {agents, setAgents} = contextAgents.agents;
+
     return (
         <main>
             <div className="wrapper">
@@ -11,16 +18,20 @@ export default function Agents() {
                     <h1>Agents.</h1>
                 </div>
             </div>
+            <div className="addButtonDiv">
+                <Link to={"/add_agent"}>
+                    <FontAwesomeIcon icon={faPlus}/> Add Agent
+                </Link>
+            </div>
             <section className={"cards"}>
-                {AgentData.map((agent, idx) => (
+                {agents.map((agent, idx) => (
                     <AgentCard
                         key={agent.id}
+                        agentId={agent.id}
                         firstName={agent.firstName}
                         lastName={agent.lastName}
                         dob={agent.dob}
-                        height={agent.height}
-                        agencies={agent.agencies}
-                        aliases={agent.aliases}/>
+                        height={agent.height}/>
                 ))}
             </section>
         </main>

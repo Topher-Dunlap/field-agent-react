@@ -3,7 +3,7 @@ import CardFooter from './CardFooter';
 import AgentDataList from './AgentDataList';
 import noImg from "../images/placeholder.png";
 
-export default function AgentCard({firstName, lastName, dob, height, agencies, aliases}) {
+export default function AgentCard({agentId, firstName, lastName, dob, height, agencies, aliases}) {
     return (
         <div className="card">
             <h3 className="cardHeader">{`${firstName} ${lastName}`}</h3>
@@ -21,7 +21,7 @@ export default function AgentCard({firstName, lastName, dob, height, agencies, a
                    aliases={aliases}
                 />
             </div>
-            <CardFooter/>
+            <CardFooter agentId={agentId}/>
         </div>
     )
 }

@@ -1,40 +1,123 @@
-import React from 'react';
-import {Link, useHistory} from "react-router-dom";
+import React, {useContext, useState, useEffect} from 'react';
+import '../css/edit-agent.css';
+import '../css/form.css';
+import BackButton from "./BackButton";
+import AgentsContext from "./AgentsContext";
+import EditAgentContext from "./EditAgentContext";
+import {useHistory} from "react-router-dom";
 
 export default function EditAgent() {
 
+    ///context for agents
+    const {agents, setAgents} = useContext(AgentsContext);
+    const {agentToEdit, setAgentToEdit} = useContext(EditAgentContext);
+
+    useEffect(() => {
+        const editAgent = agents.find(agent => agent.agentId === agentToEdit);
+
+        // edit description and category state variables
+        setFirstName(editAgent.firstName);
+        setLastName(editAgent.lastName);
+        setDob(editAgent.dob);
+        setHeight(editAgent.height);
+        setAgency(editAgent.agency);
+        setAlias(editAgent.alias);
+        setAliasPersona(editAgent.aliasPersona);
+    }, []);
+
+    ///state for form
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [dob, setDob] = useState('');
+    const [height, setHeight] = useState('');
+    const [agency, setAgency] = useState('');
+    const [alias, setAlias] = useState('');
+    const [aliasPersona, setAliasPersona] = useState('');
+
+    //for redirect after submit
     let history = useHistory();
-    function handleBack() {
-        history.push("/agents");
+
+    const firstNameOnChangeHandler = (event) => {
+        setFirstName(event.target.value);
     }
+    const lastNameOnChangeHandler = (event) => {
+        setLastName(event.target.value);
+    }
+    const dobOnChangeHandler = (event) => {
+        setDob(event.target.value);
+    }
+    const heightOnChangeHandler = (event) => {
+        setHeight(event.target.value);
+    }
+    const agencyOnChangeHandler = (event) => {
+        setAgency(event.target.value);
+    }
+    const aliasOnChangeHandler = (event) => {
+        setAlias(event.target.value);
+    }
+    const aliasPersonaOnChangeHandler = (event) => {
+        setAliasPersona(event.target.value);
+    }
+
+    const editAgentFormSubmitHandler = (event) => {
+        event.preventDefault();
+
+        const newAgent = {
+            agentId: agentToEdit,
+            firstName,
+            lastName,
+            dob,
+            height,
+            agency,
+            alias,
+            aliasPersona
+        };
+
+        const newAgents = [...agents];
+        const newAgentIndex = newAgents.findIndex(agent => agent.agentId === agentToEdit);
+        newAgents[newAgentIndex] = newAgent;
+        setAgents(newAgents);
+
+        // reset the form
+        setFirstName('');
+        setLastName('');
+        setDob('');
+        setHeight('');
+        setAgency('');
+        setAlias('');
+        setAliasPersona('');
+
+        //direct back to agents page
+        history.push("/agents");
+    };
 
     return (
         <main>
             <div className="wrapper">
-                <div className="typing-demo">
+                <div className="typing-demo-edit">
                     <h1>Edit Agent.</h1>
                 </div>
             </div>
-            <Link onClick={handleBack}>Back</Link>
-            <form>
+            <BackButton/>
+            <form onSubmit={editAgentFormSubmitHandler}>
                 <ul className="form-style-1">
                     <li>
                         <label>Full Name <span className="required">*</span></label>
-                        <input type="text" name="field1" className="field-divided" placeholder="James"/>
-                        <input type="text" name="field2" className="field-divided" placeholder="Bond"/>
+                        <input type="text" name="field1" className="field-divided" placeholder={firstName} onChange={firstNameOnChangeHandler}/>
+                        <input type="text" name="field2" className="field-divided" placeholder={lastName} onChange={lastNameOnChangeHandler}/>
                     </li>
                     <li>
                         <label htmlFor="date">Birth Date <span className="required">*</span></label>
-                        <input type="date" name="date" id="date"/>
+                        <input type="date" name="date" id="date" onChange={dobOnChangeHandler}/>
                     </li>
                     <li>
                         <label>Height (inches)<span className="required">*</span></label>
-                        <input type="text" name="field3" className="field-long" placeholder="72"/>
+                        <input type="text" name="field3" className="field-long" placeholder={height} onChange={heightOnChangeHandler}/>
                     </li>
                     <li>
                         <label>Agency</label>
-                        <select name="field4" className="field-select">
-                            <option value="default">--</option>
+                        <select name="field4" className="field-select" onChange={agencyOnChangeHandler}>
+                            <option value="default">{agency}</option>
                             <option value="Partnership">CIA</option>
                             <option value="Partnership">Scotland Yard</option>
                             <option value="General Question">MI6</option>
@@ -42,12 +125,12 @@ export default function EditAgent() {
                     </li>
                     <li>
                         <label>Alias Name</label>
-                        <input type="text" name="field6" className="field-divided" placeholder="007"/>
+                        <input type="text" name="field6" className="field-divided" placeholder={alias} onChange={aliasOnChangeHandler}/>
                     </li>
                     <li>
-                        <label>Alias Description</label>
+                        <label>Alias Persona</label>
                         <textarea name="field5" id="field5" className="field-long field-textarea"
-                                  placeholder="Secret agent that likes long walks on the beach..."/>
+                                  placeholder={aliasPersona} onChange={aliasPersonaOnChangeHandler}/>
                     </li>
                     <li>
                         <input className="buttonSubmit" type="submit" value="Submit Changes"/>

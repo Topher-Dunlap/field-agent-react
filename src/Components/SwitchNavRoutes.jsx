@@ -1,14 +1,16 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 import Registration from "./Registration";
 import UserLogin from "./UserLogin";
 import Agents from "./Agents";
+import AddAgent from "./AddAgent"
 import EditAgent from "./EditAgent";
+import DeleteAgent from "./DeleteAgent";
 import Home from "./Home";
 import NotFoundPage from "./NotFoundPage";
 
 export default function SwitchNavRoutes() {
-    return(
+    return (
         <Switch>
             <Route
                 exact path="/"
@@ -19,8 +21,16 @@ export default function SwitchNavRoutes() {
                 component={Agents}
             />
             <Route
-                path='/EditAgent'
+                path='/add_agent'
+                component={AddAgent}
+            />
+            <Route
+                path='/edit_agent'
                 component={EditAgent}
+            />
+            <Route
+                path='/delete_agent'
+                component={DeleteAgent}
             />
             <Route
                 path='/login'
