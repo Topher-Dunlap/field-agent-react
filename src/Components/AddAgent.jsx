@@ -45,7 +45,7 @@ export default function AddAgent() {
 
     const addAgentFormSubmitHandler = (event) => {
         event.preventDefault();
-        const nextId = agents.length > 0 ? Math.max(...agents.map(a => a.id)) + 1 : 1;
+        const nextId = agents.length > 0 ? Math.max(...agents.map(a => a.agentId)) + 1 : 1;
 
         const newAgent = {
             agentId: nextId,
