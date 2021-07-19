@@ -14,7 +14,6 @@ export default function EditAgent() {
 
     useEffect(() => {
         const editAgent = agents.find(agent => agent.agentId === agentToSelect);
-        console.log("agent selected: " + editAgent.aliases)
 
         // edit description and category state variables
         setFirstName(editAgent.firstName);
@@ -84,7 +83,7 @@ export default function EditAgent() {
         setLastName('');
         setDob('');
         setHeight('');
-        agencyName('');
+        setAgencyName('');
         setAliasName('');
         setAliasPersona('');
 
@@ -112,7 +111,7 @@ export default function EditAgent() {
                     </li>
                     <li>
                         <label htmlFor="date">Birth Date <span className="required">*</span></label>
-                        <input type="date" name="date" id="date" onChange={dobOnChangeHandler}/>
+                        <input type="date" name="date" id="date" onFocus={`this.type=${dob}`} onBlur="(this.type='text')" onChange={dobOnChangeHandler}/>
                     </li>
                     <li>
                         <label>Height (inches)<span className="required">*</span></label>
