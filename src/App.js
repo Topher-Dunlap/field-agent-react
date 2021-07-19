@@ -7,19 +7,19 @@ import './css/reset.css';
 import './css/main.css';
 import AgentData from "./data";
 import AgentsContext from "./Components/AgentsContext";
-import EditAgentContext from "./Components/EditAgentContext";
+import SelectAgentContext from "./Components/SelectAgentContext";
 
 function App() {
 
     const [agents, setAgents] = useState(AgentData);
     const contextAgents = {agents, setAgents};
 
-    const [agentToEdit, setAgentToEdit] = useState('');
-    const contextEditAgent = {agentToEdit, setAgentToEdit};
+    const [agentToSelect, setAgentToSelect] = useState('');
+    const contextSelectAgent = {agentToSelect, setAgentToSelect};
 
     return (
         <AgentsContext.Provider value={contextAgents}>
-            <EditAgentContext.Provider value={contextEditAgent}>
+            <SelectAgentContext.Provider value={contextSelectAgent}>
                 <header>
                     <Nav/>
                 </header>
@@ -27,7 +27,7 @@ function App() {
                     <SwitchNavRoutes/>
                 </ErrorBoundary>
                 <Footer/>
-            </EditAgentContext.Provider>
+            </SelectAgentContext.Provider>
         </AgentsContext.Provider>
     );
 }

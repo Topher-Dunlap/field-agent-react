@@ -3,17 +3,17 @@ import '../css/edit-agent.css';
 import '../css/form.css';
 import BackButton from "./BackButton";
 import AgentsContext from "./AgentsContext";
-import EditAgentContext from "./EditAgentContext";
+import SelectAgentContext from "./SelectAgentContext";
 import {useHistory} from "react-router-dom";
 
 export default function EditAgent() {
 
     ///context for agents
     const {agents, setAgents} = useContext(AgentsContext);
-    const {agentToEdit, setAgentToEdit} = useContext(EditAgentContext);
+    const {agentToSelect, setAgentToSelect} = useContext(SelectAgentContext);
 
     useEffect(() => {
-        const editAgent = agents.find(agent => agent.agentId === agentToEdit);
+        const editAgent = agents.find(agent => agent.agentId === agentToSelect);
 
         // edit description and category state variables
         setFirstName(editAgent.firstName);
@@ -63,7 +63,7 @@ export default function EditAgent() {
         event.preventDefault();
 
         const newAgent = {
-            agentId: agentToEdit,
+            agentId: agentToSelect,
             firstName,
             lastName,
             dob,
@@ -74,7 +74,7 @@ export default function EditAgent() {
         };
 
         const newAgents = [...agents];
-        const newAgentIndex = newAgents.findIndex(agent => agent.agentId === agentToEdit);
+        const newAgentIndex = newAgents.findIndex(agent => agent.agentId === agentToSelect);
         newAgents[newAgentIndex] = newAgent;
         setAgents(newAgents);
 
@@ -86,6 +86,9 @@ export default function EditAgent() {
         setAgency('');
         setAlias('');
         setAliasPersona('');
+
+        //reset select agent state
+        setAgentToSelect('');
 
         //direct back to agents page
         history.push("/agents");

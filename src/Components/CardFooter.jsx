@@ -3,40 +3,29 @@ import {Link, useHistory} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
 import AgentsContext from "./AgentsContext";
-import EditAgentContext from "./EditAgentContext";
+import SelectAgentContext from "./SelectAgentContext";
 
 export default function CardFooter({agentId}) {
 
     //context
     const {agents, setAgents} = useContext(AgentsContext);
-    const {agentToEdit, setAgentToEdit} = useContext(EditAgentContext);
-
-    //for redirect after submit
-    let history = useHistory();
-
-    //delete agent
-    function agentToDeleteOnClick() {
-        setAgents(agents.filter(agent => agent.agentId !== agentId));
-
-        //direct back to agents page
-        history.push("/agents");
-    }
+    const {agentToSelect, setAgentToSelect} = useContext(SelectAgentContext);
 
     //update context with agentID to update
-    function agentToUpdateOnClick() {
-        setAgentToEdit(agentId)
+    function agentToSelectOnClick() {
+        setAgentToSelect(agentId)
     }
 
     return (
         <div className="cardFooter">
             <p>
-                <Link to={"/edit_agent"} className="fa fa-edit" onClick={agentToUpdateOnClick}>
+                <Link to={"/edit_agent"} className="fa fa-edit" onClick={agentToSelectOnClick}>
                     <FontAwesomeIcon icon={faEdit} />
                 </Link>
             </p>
             <hr/>
             <p>
-                <Link to={"/delete_agent"} className="fa fa-trash" onClick={agentToDeleteOnClick}>
+                <Link to={"/delete_agent"} className="fa fa-trash" onClick={agentToSelectOnClick}>
                     <FontAwesomeIcon icon={faTrash} />
                 </Link>
             </p>

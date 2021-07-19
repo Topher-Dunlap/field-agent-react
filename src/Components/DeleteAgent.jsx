@@ -1,11 +1,31 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import '../css/delete-agent.css';
 import CancelButton from "./CancelButton";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCheck} from "@fortawesome/free-solid-svg-icons";
+import AgentsContext from "./AgentsContext";
+import SelectAgentContext from "./SelectAgentContext";
 
 export default function DeleteAgent() {
+
+    const {agents, setAgents} = useContext(AgentsContext);
+    const {agentToSelect, setAgentToSelect} = useContext(SelectAgentContext);
+
+    //for redirect after submit
+    let history = useHistory();
+
+    //delete agent
+    function agentDeleteOnClick() {
+        setAgents(agents.filter(agent => agent.agentId !== agentToSelect));
+
+        //reset select agent state
+        setAgentToSelect('');
+
+        //direct back to agents page
+        history.push("/agents");
+    }
+
     return (
         <div>
             <header>
@@ -22,7 +42,9 @@ export default function DeleteAgent() {
                     <div className="deleteAgentButtons">
                         <CancelButton className="cancelButton"/>
                         <div className="confirmButton">
-                            <Link><FontAwesomeIcon icon={faCheck}/> Confirm</Link>
+                            <Link onClick={agentDeleteOnClick}>
+                                <FontAwesomeIcon icon={faCheck}/> Confirm
+                            </Link>
                         </div>
                     </div>
                 </div>

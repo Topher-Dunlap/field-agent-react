@@ -5,7 +5,7 @@
 
 * [x] Create React App (CRA was used to create the project)
 * [ ] Features (each feature complete, works without errors)
-    * [ ] Agents
+    * [x] Agents
     * [ ] Add Agent
     * [ ] Edit Agent
     * [ ] Delete Agent
