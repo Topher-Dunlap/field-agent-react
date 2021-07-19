@@ -1,71 +1,39 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Module 9 Assessment Requirements Checklist and Test Plan
 
-## Available Scripts
+## Requirements Checklist
 
-In the project directory, you can run:
+* [x] Create React App (CRA was used to create the project)
+* [ ] Features (each feature complete, works without errors)
+    * [ ] Agents
+    * [ ] Add Agent
+    * [ ] Edit Agent
+    * [ ] Delete Agent
+* [x] In memory data (in memory data was used with the expected property names)
+* [x] JavaScript (valid, well-organized, clean and consistent formatting)
+* [x] JSX (valid, well-organized, clean and consistent formatting)
+* [x] HTML/CSS (migrated from the previous assessment or used a CSS framework)
 
-### `npm start`
+## Test Plan
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# field-agent-react
+* [x] Agents
+    * [x] Displays a list of the agents from the provided data with basic information
+    * [x] Includes a button/link to display to the Add Agent view
+    * [x] For each agent, includes buttons/links to display the Edit Agent and Delete Agent views
+* [ ] Add Agent
+    * [x] Displays a form for the user to enter an agent's information
+    * [x] Includes a button to submit the form
+    * [x] Includes a button/link to cancel the add operation and return to the list of agents
+    * [ ] An agent's information can be entered into the form and when the form is submitted, the agent is added to the list of agents
+* [ ] Edit Agent
+    * [x] Displays a form for the user to edit an agent's information
+    * [x] Includes a button to submit the form
+    * [x] Includes a link to cancel the edit operation and return to the list of agents
+    * [ ] The form pre-populates with the agent's current information
+    * [ ] The agent's information can be changed in the form and when the form is submitted, the agent is updated in the list of agents
+* [ ] Delete Agent
+    * [x] Displays an agent's basic information
+    * [x] Displays a delete confirmation message
+    * [x] Includes a button to complete the delete operation
+    * [x] Includes a link to cancel the delete operation and return to the list of agents
+    * [ ] Proceeding with the delete operation removes the agent from the list of agents
