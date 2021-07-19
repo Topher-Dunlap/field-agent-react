@@ -5,12 +5,12 @@ import {Link} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlus} from "@fortawesome/free-solid-svg-icons";
 import AgentsContext from "./AgentsContext";
-import AgentData from "../data";
+// import AgentData from "../data";
 
 export default function Agents() {
 
     const contextAgents = useContext(AgentsContext);
-    let {agents, setAgents} = contextAgents.agents;
+    let {agents, setAgents} = contextAgents;
 
     // const [agents, setAgents] = useState(AgentData);
 
@@ -34,7 +34,9 @@ export default function Agents() {
                         firstName={agent.firstName}
                         lastName={agent.lastName}
                         dob={agent.dob}
-                        height={agent.height}/>
+                        height={agent.height}
+                        agencies={agent.agencies}
+                        aliases={agent.aliases}/>
                 ))}
             </section>
         </main>

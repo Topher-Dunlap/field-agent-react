@@ -7,7 +7,7 @@ export default function AgentDataList({dob, height, agencies, aliases}){
             <li><label className="cardLabel">Height: </label> {height}</li>
             <li><label className="cardLabel">Agencies: </label>
                 <ul>
-                    {agencies.map(agency => (<li key={agency.agencyId}>{agency.shortName}</li>))}
+                    {agencies.map(a => (<li key={a.agencyId}>{a.shortName}</li>))}
                 </ul>
             </li>
             <li><label className="cardLabel">Aliases: </label>

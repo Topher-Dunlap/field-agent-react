@@ -1,14 +1,12 @@
 import React, {useContext} from 'react';
-import {Link, useHistory} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
-import AgentsContext from "./AgentsContext";
 import SelectAgentContext from "./SelectAgentContext";
 
 export default function CardFooter({agentId}) {
 
     //context
-    const {agents, setAgents} = useContext(AgentsContext);
     const {agentToSelect, setAgentToSelect} = useContext(SelectAgentContext);
 
     //update context with agentID to update
