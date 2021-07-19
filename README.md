@@ -8,7 +8,7 @@
     * [x] Agents
     * [ ] Add Agent
     * [ ] Edit Agent
-    * [ ] Delete Agent
+    * [x] Delete Agent
 * [x] In memory data (in memory data was used with the expected property names)
 * [x] JavaScript (valid, well-organized, clean and consistent formatting)
 * [x] JSX (valid, well-organized, clean and consistent formatting)
@@ -29,11 +29,11 @@
     * [x] Displays a form for the user to edit an agent's information
     * [x] Includes a button to submit the form
     * [x] Includes a link to cancel the edit operation and return to the list of agents
-    * [ ] The form pre-populates with the agent's current information
+    * [x] The form pre-populates with the agent's current information
     * [ ] The agent's information can be changed in the form and when the form is submitted, the agent is updated in the list of agents
-* [ ] Delete Agent
+* [x] Delete Agent
     * [x] Displays an agent's basic information
     * [x] Displays a delete confirmation message
     * [x] Includes a button to complete the delete operation
     * [x] Includes a link to cancel the delete operation and return to the list of agents
-    * [ ] Proceeding with the delete operation removes the agent from the list of agents
+    * [x] Proceeding with the delete operation removes the agent from the list of agents
