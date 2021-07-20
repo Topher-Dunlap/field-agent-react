@@ -2,49 +2,47 @@ import React, {useContext, useState, useEffect} from 'react';
 import {useHistory, useParams} from "react-router-dom";
 import BackButton from "./BackButton";
 import AgentsContext from "./AgentsContext";
-import DefaultAgentContext from "./DefaultAgentContext";
-import FormAgentContext from "./FormAgentContext";
+import DEFAULT_AGENT from "../default_values/default_agent";
 import '../css/edit-agent.css';
 import '../css/form.css';
 
 export default function EditAgent() {
     ///context for agents
     const {agents, setAgents} = useContext(AgentsContext);
-    const {defaultAgent, setDefaultAgent} = useContext(DefaultAgentContext);
-    const {formAgent, setFormAgent} = useContext(FormAgentContext);
 
     ///agentToEdit State
-    const [agentToEdit, setAgentToEdit] = useState([])
+    const [agentToEdit, setAgentToEdit] = useState(DEFAULT_AGENT);
 
     //for redirect after submit
     let history = useHistory();
 
     //agent_id from dynamic route
-    const { agent_id } = useParams();
+    let { agent_id } = useParams();
+    agent_id = parseInt(agent_id, 10);
 
     useEffect(() => {
         const editAgent = agents.find(agent => agent.agentId === agent_id);
-        const tempAgent = {...editAgent}
+        ///deep copy
+        const tempAgent = {...editAgent, agencies:[...editAgent.agencies], aliases:[...editAgent.aliases]}
         setAgentToEdit(tempAgent);
-        debugger;
-    }, []);
+    }, [agent_id]);
 
     const resetForm = () => {
-        setFormAgent(defaultAgent);
+        setAgentToEdit(DEFAULT_AGENT);
     };
 
     const editInputOnChangeHandler = (event) => {
-        const nextAgent = { ...formAgent };
+        const nextAgent = { ...agentToEdit };
         // this updates the property on the object
         nextAgent[event.target.name] = event.target.value;
         // update the state variable
-        setFormAgent(nextAgent);
+        setAgentToEdit(nextAgent);
     }
 
     const editAgentFormSubmitHandler = (event) => {
         event.preventDefault();
 
-        const newAgent = { ...formAgent, agentId: agent_id }
+        const newAgent = { ...agentToEdit, agentId: agent_id }
 
         const newAgents = [...agents];
 
@@ -58,12 +56,13 @@ export default function EditAgent() {
         //reset form state
         resetForm();
 
-        // //reset select agent state
-        // setAgentToSelect('');
-
         //direct back to agents page
         history.push("/agents");
     };
+
+    if(!agentToEdit){
+        return null;
+    }
 
     return (
         <main>
@@ -76,17 +75,18 @@ export default function EditAgent() {
             <form onSubmit={editAgentFormSubmitHandler}>
                 <ul className="form-style-1">
                     <li>
-                        <label>Full Name <span className="required">*</span></label>
-                        <input type="text" name="firstName" className="field-divided" placeholder={agentToEdit.firstName} onChange={editInputOnChangeHandler}/>
-                        <input type="text" name="lastName" className="field-divided" placeholder={agentToEdit.lastName} onChange={editInputOnChangeHandler}/>
+                        <label>First Name <span className="required">*</span></label>
+                        <input type="text" name="firstName" className="field-divided" value={agentToEdit.firstName} onChange={editInputOnChangeHandler}/>
+                        <label>Last Name <span className="required">*</span></label>
+                        <input type="text" name="lastName" className="field-divided" value={agentToEdit.lastName} onChange={editInputOnChangeHandler}/>
                     </li>
                     <li>
                         <label htmlFor="date">Birth Date <span className="required">*</span></label>
-                        <input type="date" name="dob" id="date" onFocus={`this.type=${agentToEdit.dob}`} onBlur="(this.type='text')" onChange={editInputOnChangeHandler}/>
+                        <input type="date" name="dob" id="date" value={agentToEdit.dob} onChange={editInputOnChangeHandler}/>
                     </li>
                     <li>
                         <label>Height (inches)<span className="required">*</span></label>
-                        <input type="text" name="height" className="field-long" placeholder={agentToEdit.height} onChange={editInputOnChangeHandler}/>
+                        <input type="text" name="height" className="field-long" value={agentToEdit.height} onChange={editInputOnChangeHandler}/>
                     </li>
                     <li>
                         <label>Agency</label>
@@ -99,12 +99,12 @@ export default function EditAgent() {
                     </li>
                     <li>
                         <label>Alias Name</label>
-                        <input type="text" name="aliases[0].name" className="field-divided" placeholder={agentToEdit.aliases[0].name} onChange={editInputOnChangeHandler}/>
+                        <input type="text" name="aliases[0].name" className="field-divided" value={agentToEdit.aliases[0].name} onChange={editInputOnChangeHandler}/>
                     </li>
                     <li>
                         <label>Alias Persona</label>
                         <textarea name="aliases[0].persona" id="field5" className="field-long field-textarea"
-                                  placeholder={agentToEdit.aliases[0].persona} onChange={editInputOnChangeHandler}/>
+                                  value={agentToEdit.aliases[0].persona} onChange={editInputOnChangeHandler}/>
                     </li>
                     <li>
                         <input className="buttonSubmit" type="submit" value="Submit Changes"/>

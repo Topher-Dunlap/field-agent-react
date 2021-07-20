@@ -17,7 +17,7 @@ export default function SwitchNavRoutes() {
                 component={Home}
             />
             <Route
-                path='/agents'
+                exact path='/agents'
                 component={Agents}
             />
             <Route
@@ -32,10 +32,10 @@ export default function SwitchNavRoutes() {
                 path='/agents/delete/:agent_id'
                 component={DeleteAgent}
             />
-            {/*<Route*/}
-            {/*    path='/login'*/}
-            {/*    component={UserLogin}*/}
-            {/*/>*/}
+            <Route
+                path='/login'
+                component={UserLogin}
+            />
             {/*<Route*/}
             {/*    path='/register'*/}
             {/*    component={Registration}*/}

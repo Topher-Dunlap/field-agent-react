@@ -1,38 +1,39 @@
 import React, {useContext, useState} from 'react';
+import {useHistory} from "react-router-dom";
 import '../css/add-agent.css';
 import '../css/form.css';
 import AgentsContext from "./AgentsContext";
-import {useHistory} from "react-router-dom";
-import DefaultAgentContext from "./DefaultAgentContext";
-import FormAgentContext from "./FormAgentContext";
+import DEFAULT_AGENT from "../default_values/default_agent";
+
 
 export default function AddAgent() {
 
     ///context for agents
     const {agents, setAgents} = useContext(AgentsContext);
-    const {defaultAgent, setDefaultAgent} = useContext(DefaultAgentContext)
-    const {formAgent, setFormAgent} = useContext(FormAgentContext);
+
+    //state for new agent
+    const [newAgentValues, setNewAgentValues] = useState(null);
 
     //for redirect after submit
     let history = useHistory();
 
     const resetForm = () => {
-        setFormAgent(defaultAgent);
+        setNewAgentValues(DEFAULT_AGENT);
     };
 
     const formInputOnChangeHandler = (event) => {
-        const nextAgent = { ...formAgent };
+        const nextAgent = { ...newAgentValues };
         // this updates the property on the object
         nextAgent[event.target.name] = event.target.value;
         // update the state variable
-        setFormAgent(nextAgent);
+        setNewAgentValues(nextAgent);
     }
 
     const addAgentFormSubmitHandler = (event) => {
         event.preventDefault();
         const nextId = agents.length > 0 ? Math.max(...agents.map(a => a.agentId)) + 1 : 1;
 
-        const newAgent = { ...defaultAgent, agentId: nextId}
+        const newAgent = { ...newAgentValues, agentId: nextId}
 
         setAgents([...agents, newAgent]);
 
