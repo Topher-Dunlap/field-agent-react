@@ -4,10 +4,10 @@
 ## Requirements Checklist
 
 * [x] Create React App (CRA was used to create the project)
-* [ ] Features (each feature complete, works without errors)
+* [x] Features (each feature complete, works without errors)
     * [x] Agents
-    * [ ] Add Agent
-    * [ ] Edit Agent
+    * [x] Add Agent
+    * [x] Edit Agent
     * [x] Delete Agent
 * [x] In memory data (in memory data was used with the expected property names)
 * [x] JavaScript (valid, well-organized, clean and consistent formatting)
