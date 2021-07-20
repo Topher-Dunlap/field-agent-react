@@ -1,91 +1,61 @@
 import React, {useContext, useState, useEffect} from 'react';
-import '../css/edit-agent.css';
-import '../css/form.css';
+import {useHistory, useParams} from "react-router-dom";
 import BackButton from "./BackButton";
 import AgentsContext from "./AgentsContext";
 import SelectAgentContext from "./SelectAgentContext";
-import {useHistory} from "react-router-dom";
+import DefaultAgentContext from "./DefaultAgentContext";
+import FormAgentContext from "./FormAgentContext";
+import '../css/edit-agent.css';
+import '../css/form.css';
 
 export default function EditAgent() {
     ///context for agents
     const {agents, setAgents} = useContext(AgentsContext);
     const {agentToSelect, setAgentToSelect} = useContext(SelectAgentContext);
+    const {defaultAgent, setDefaultAgent} = useContext(DefaultAgentContext);
+    const {formAgent, setFormAgent} = useContext(FormAgentContext);
 
-    useEffect(() => {
-        const editAgent = agents.find(agent => agent.agentId === agentToSelect);
-        // edit description and category state variables
-        setFirstName(editAgent.firstName);
-        setLastName(editAgent.lastName);
-        setDob(editAgent.dob);
-        setHeight(editAgent.height);
-        setAgencyShortName(editAgent.agencies[0].shortName);
-        setAliasName(editAgent.aliases[0].name);
-        setAliasPersona(editAgent.aliases[0].persona);
-    }, []);
-
-    ///state for form
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [dob, setDob] = useState('');
-    const [height, setHeight] = useState('');
-    const [agencyShortName, setAgencyShortName] = useState('');
-    const [aliasName, setAliasName] = useState('');
-    const [aliasPersona, setAliasPersona] = useState('');
+    ///agentToEdit State
+    const [agentToEdit, setAgentToEdit] = useState([])
 
     //for redirect after submit
     let history = useHistory();
 
-    const firstNameOnChangeHandler = (event) => {
-        setFirstName(event.target.value);
-    }
-    const lastNameOnChangeHandler = (event) => {
-        setLastName(event.target.value);
-    }
-    const dobOnChangeHandler = (event) => {
-        setDob(event.target.value);
-    }
-    const heightOnChangeHandler = (event) => {
-        setHeight(event.target.value);
-    }
-    const agencyOnChangeHandler = (event) => {
-        setAgencyShortName(event.target.value);
-    }
-    const aliasOnChangeHandler = (event) => {
-        setAliasName(event.target.value);
-    }
-    const aliasPersonaOnChangeHandler = (event) => {
-        setAliasPersona(event.target.value);
+    useEffect(() => {
+        const editAgent = agents.find(agent => agent.agentId === agentToSelect);
+        const tempAgent = {...editAgent}
+        setAgentToEdit(tempAgent);
+        debugger;
+    }, []);
+
+    const resetForm = () => {
+        setFormAgent(defaultAgent);
+    };
+
+    const editInputOnChangeHandler = (event) => {
+        const nextAgent = { ...formAgent };
+        // this updates the property on the object
+        nextAgent[event.target.name] = event.target.value;
+        // update the state variable
+        setFormAgent(nextAgent);
     }
 
     const editAgentFormSubmitHandler = (event) => {
         event.preventDefault();
 
-        const newAgent = {
-            agentId: agentToSelect,
-            firstName: firstName,
-            lastName: lastName,
-            dob: dob,
-            height: height,
-            agencies: [{shortName: agencyShortName}],
-            aliases: [{
-                name: aliasName,
-                persona: aliasPersona
-            }],
-        };
+        const newAgent = { ...formAgent, agentId: agentToSelect }
 
         const newAgents = [...agents];
+
         const newAgentIndex = newAgents.findIndex(agent => agent.agentId === agentToSelect);
+
         newAgents[newAgentIndex] = newAgent;
+
+        //update agent data with new agent
         setAgents(newAgents);
 
-        // reset the form
-        setFirstName('');
-        setLastName('');
-        setDob('');
-        setHeight('');
-        setAgencyShortName('');
-        setAliasName('');
-        setAliasPersona('');
+        //reset form state
+        resetForm();
 
         //reset select agent state
         setAgentToSelect('');
@@ -106,21 +76,21 @@ export default function EditAgent() {
                 <ul className="form-style-1">
                     <li>
                         <label>Full Name <span className="required">*</span></label>
-                        <input type="text" name="field1" className="field-divided" placeholder={firstName} onChange={firstNameOnChangeHandler}/>
-                        <input type="text" name="field2" className="field-divided" placeholder={lastName} onChange={lastNameOnChangeHandler}/>
+                        <input type="text" name="firstName" className="field-divided" placeholder={agentToEdit.firstName} onChange={editInputOnChangeHandler}/>
+                        <input type="text" name="lastName" className="field-divided" placeholder={agentToEdit.lastName} onChange={editInputOnChangeHandler}/>
                     </li>
                     <li>
                         <label htmlFor="date">Birth Date <span className="required">*</span></label>
-                        <input type="date" name="date" id="date" onFocus={`this.type=${dob}`} onBlur="(this.type='text')" onChange={dobOnChangeHandler}/>
+                        <input type="date" name="dob" id="date" onFocus={`this.type=${agentToEdit.dob}`} onBlur="(this.type='text')" onChange={editInputOnChangeHandler}/>
                     </li>
                     <li>
                         <label>Height (inches)<span className="required">*</span></label>
-                        <input type="text" name="field3" className="field-long" placeholder={height} onChange={heightOnChangeHandler}/>
+                        <input type="text" name="height" className="field-long" placeholder={agentToEdit.height} onChange={editInputOnChangeHandler}/>
                     </li>
                     <li>
                         <label>Agency</label>
-                        <select name="field4" className="field-select" onChange={agencyOnChangeHandler}>
-                            <option value="default">{agencyShortName}</option>
+                        <select name="agencies[0].shortName" className="field-select" onChange={editInputOnChangeHandler}>
+                            <option value="default">{agentToEdit.agencies[0].shortName}</option>
                             <option value="Partnership">CIA</option>
                             <option value="Partnership">Scotland Yard</option>
                             <option value="General Question">MI6</option>
@@ -128,12 +98,12 @@ export default function EditAgent() {
                     </li>
                     <li>
                         <label>Alias Name</label>
-                        <input type="text" name="field6" className="field-divided" placeholder={aliasName} onChange={aliasOnChangeHandler}/>
+                        <input type="text" name="aliases[0].name" className="field-divided" placeholder={agentToEdit.aliases[0].name} onChange={editInputOnChangeHandler}/>
                     </li>
                     <li>
                         <label>Alias Persona</label>
-                        <textarea name="field5" id="field5" className="field-long field-textarea"
-                                  placeholder={aliasPersona} onChange={aliasPersonaOnChangeHandler}/>
+                        <textarea name="aliases[0].persona" id="field5" className="field-long field-textarea"
+                                  placeholder={agentToEdit.aliases[0].persona} onChange={editInputOnChangeHandler}/>
                     </li>
                     <li>
                         <input className="buttonSubmit" type="submit" value="Submit Changes"/>

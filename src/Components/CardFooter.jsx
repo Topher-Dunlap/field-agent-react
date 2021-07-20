@@ -17,13 +17,13 @@ export default function CardFooter({agentId}) {
     return (
         <div className="cardFooter">
             <p>
-                <Link to={"/edit_agent"} className="fa fa-edit" onClick={agentToSelectOnClick}>
+                <Link to={"/agents/edit"} className="fa fa-edit" onClick={agentToSelectOnClick}>
                     <FontAwesomeIcon icon={faEdit} />
                 </Link>
             </p>
             <hr/>
             <p>
-                <Link to={"/delete_agent"} className="fa fa-trash" onClick={agentToSelectOnClick}>
+                <Link to={"/agents/delete"} className="fa fa-trash" onClick={agentToSelectOnClick}>
                     <FontAwesomeIcon icon={faTrash} />
                 </Link>
             </p>

@@ -21,15 +21,15 @@ export default function SwitchNavRoutes() {
                 component={Agents}
             />
             <Route
-                path='/add_agent'
+                path='/agents/add'
                 component={AddAgent}
             />
             <Route
-                path='/edit_agent'
+                path='/agents/edit'
                 component={EditAgent}
             />
             <Route
-                path='/delete_agent'
+                path='/agents/delete'
                 component={DeleteAgent}
             />
             {/*<Route*/}

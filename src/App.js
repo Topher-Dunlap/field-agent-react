@@ -8,8 +8,23 @@ import './css/main.css';
 import AgentData from "./data";
 import AgentsContext from "./Components/AgentsContext";
 import SelectAgentContext from "./Components/SelectAgentContext";
+import DefaultAgentContext from "./Components/DefaultAgentContext";
+import FormAgentContext from "./Components/FormAgentContext";
 
 function App() {
+
+    const DEFAULT_AGENT = {
+        agentId: 0,
+        firstName: '',
+        lastName: '',
+        dob: '',
+        height: '',
+        agencies: [{shortName: ''}],
+        aliases: [{
+            name: '',
+            persona: ''
+        }],
+    }
 
     const [agents, setAgents] = useState(AgentData);
     const contextAgents = {agents, setAgents};
@@ -17,16 +32,26 @@ function App() {
     const [agentToSelect, setAgentToSelect] = useState('');
     const contextSelectAgent = {agentToSelect, setAgentToSelect};
 
+    const [defaultAgent, setDefaultAgent] = useState(DEFAULT_AGENT)
+    const contextDefaultAgent = {defaultAgent, setDefaultAgent}
+
+    const [formAgent, setFormAgent] = useState(defaultAgent)
+    const contextFormAgent = {formAgent, setFormAgent}
+
     return (
         <AgentsContext.Provider value={contextAgents}>
             <SelectAgentContext.Provider value={contextSelectAgent}>
-                <header>
-                    <Nav/>
-                </header>
-                <ErrorBoundary>
-                    <SwitchNavRoutes/>
-                </ErrorBoundary>
-                <Footer/>
+                <DefaultAgentContext.Provider value={contextDefaultAgent}>
+                    <FormAgentContext.Provider value={contextFormAgent}>
+                        <header>
+                            <Nav/>
+                        </header>
+                        <ErrorBoundary>
+                            <SwitchNavRoutes/>
+                        </ErrorBoundary>
+                        <Footer/>
+                    </FormAgentContext.Provider>
+                </DefaultAgentContext.Provider>
             </SelectAgentContext.Provider>
         </AgentsContext.Provider>
     );

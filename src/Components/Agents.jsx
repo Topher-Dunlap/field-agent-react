@@ -19,7 +19,7 @@ export default function Agents() {
                 </div>
             </div>
             <div className="addButtonDiv">
-                <Link to={"/add_agent"}>
+                <Link to={"/agents/add"}>
                     <FontAwesomeIcon icon={faPlus}/> Add Agent
                 </Link>
             </div>
