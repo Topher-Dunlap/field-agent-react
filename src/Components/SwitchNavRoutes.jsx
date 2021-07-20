@@ -25,11 +25,11 @@ export default function SwitchNavRoutes() {
                 component={AddAgent}
             />
             <Route
-                path='/agents/edit'
+                path='/agents/edit/:agent_id'
                 component={EditAgent}
             />
             <Route
-                path='/agents/delete'
+                path='/agents/delete/:agent_id'
                 component={DeleteAgent}
             />
             {/*<Route*/}

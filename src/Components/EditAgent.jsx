@@ -2,7 +2,6 @@ import React, {useContext, useState, useEffect} from 'react';
 import {useHistory, useParams} from "react-router-dom";
 import BackButton from "./BackButton";
 import AgentsContext from "./AgentsContext";
-import SelectAgentContext from "./SelectAgentContext";
 import DefaultAgentContext from "./DefaultAgentContext";
 import FormAgentContext from "./FormAgentContext";
 import '../css/edit-agent.css';
@@ -11,7 +10,6 @@ import '../css/form.css';
 export default function EditAgent() {
     ///context for agents
     const {agents, setAgents} = useContext(AgentsContext);
-    const {agentToSelect, setAgentToSelect} = useContext(SelectAgentContext);
     const {defaultAgent, setDefaultAgent} = useContext(DefaultAgentContext);
     const {formAgent, setFormAgent} = useContext(FormAgentContext);
 
@@ -21,8 +19,11 @@ export default function EditAgent() {
     //for redirect after submit
     let history = useHistory();
 
+    //agent_id from dynamic route
+    const { agent_id } = useParams();
+
     useEffect(() => {
-        const editAgent = agents.find(agent => agent.agentId === agentToSelect);
+        const editAgent = agents.find(agent => agent.agentId === agent_id);
         const tempAgent = {...editAgent}
         setAgentToEdit(tempAgent);
         debugger;
@@ -43,11 +44,11 @@ export default function EditAgent() {
     const editAgentFormSubmitHandler = (event) => {
         event.preventDefault();
 
-        const newAgent = { ...formAgent, agentId: agentToSelect }
+        const newAgent = { ...formAgent, agentId: agent_id }
 
         const newAgents = [...agents];
 
-        const newAgentIndex = newAgents.findIndex(agent => agent.agentId === agentToSelect);
+        const newAgentIndex = newAgents.findIndex(agent => agent.agentId === agent_id);
 
         newAgents[newAgentIndex] = newAgent;
 
@@ -57,8 +58,8 @@ export default function EditAgent() {
         //reset form state
         resetForm();
 
-        //reset select agent state
-        setAgentToSelect('');
+        // //reset select agent state
+        // setAgentToSelect('');
 
         //direct back to agents page
         history.push("/agents");

@@ -1,29 +1,27 @@
 import React, {useContext} from 'react';
+import {Link, useHistory, useParams} from "react-router-dom";
 import '../css/delete-agent.css';
 import CancelButton from "./CancelButton";
-import {Link, useHistory} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCheck} from "@fortawesome/free-solid-svg-icons";
 import AgentsContext from "./AgentsContext";
-import SelectAgentContext from "./SelectAgentContext";
 
 export default function DeleteAgent() {
 
     const {agents, setAgents} = useContext(AgentsContext);
-    const {agentToSelect, setAgentToSelect} = useContext(SelectAgentContext);
 
     //agent to delete data
-    const agentToDelete = agents.filter(agent => agent.agentId === agentToSelect);
+    const agentToDelete = agents.filter(agent => agent.agentId === agent_id);
 
     //for redirect after submit
     let history = useHistory();
 
+    //agent_id from dynamic route
+    const { agent_id } = useParams();
+
     //delete agent
     function agentDeleteOnClick() {
-        setAgents(agents.filter(agent => agent.agentId !== agentToSelect));
-
-        //reset select agent state
-        setAgentToSelect('');
+        setAgents(agents.filter(agent => agent.agentId !== agent_id));
 
         //direct back to agents page
         history.push("/agents");
