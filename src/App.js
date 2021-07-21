@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState, useEffect} from 'react';
+import Nav from "./Components/Nav";
+import Footer from "./Components/Footer";
+import SwitchNavRoutes from "./Components/SwitchNavRoutes";
+import ErrorBoundary from "./Components/ErrorBoundary";
+import './css/reset.css';
+import './css/main.css';
+import AgentData from "./data";
+import AgentsContext from "./Components/AgentsContext";
+import SelectAgentContext from "./Components/SelectAgentContext";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+    const [agents, setAgents] = useState(AgentData);
+    const contextAgents = {agents, setAgents};
+
+    const [agentToSelect, setAgentToSelect] = useState('');
+    const contextSelectAgent = {agentToSelect, setAgentToSelect};
+
+    return (
+        <AgentsContext.Provider value={contextAgents}>
+            <SelectAgentContext.Provider value={contextSelectAgent}>
+                <header>
+                    <Nav/>
+                </header>
+                <ErrorBoundary>
+                    <SwitchNavRoutes/>
+                </ErrorBoundary>
+                <Footer/>
+            </SelectAgentContext.Provider>
+        </AgentsContext.Provider>
+    );
 }
 
 export default App;

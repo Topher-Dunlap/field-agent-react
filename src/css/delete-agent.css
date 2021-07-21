@@ -1,0 +1,114 @@
+.wrapper {
+    height: 25vh;
+    /*This part is important for centering*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.typing-demo-delete {
+    width: 24ch;
+    animation: typing 1.19s steps(22), blink .5s step-end infinite alternate;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 3px solid;
+    font-family: monospace;
+    font-size: 1.30rem;
+    color: black;
+}
+
+.typing-demo-delete > h1 {
+    color: white;
+}
+
+@keyframes typing {
+    from {
+        width: 0
+    }
+}
+
+@keyframes blink {
+    50% {
+        border-color: transparent
+    }
+}
+
+.bottomButtonDiv {
+    padding: 0.4rem;
+    border-radius: 25px;
+    background-color: white;
+}
+
+.bottomButton {
+    margin: .5rem
+}
+
+.bottomButtonDiv > div {
+    margin: 1rem;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.bottomButtonDiv > div > li > a {
+    border-radius: 25px;
+    color: #333333;
+}
+
+.deleteAgentButtons {
+    margin: 1rem;
+    display: flex;
+    justify-content: space-evenly;
+    align-content: center;
+}
+
+.cancelButton > a {
+    background-color: red;
+    padding: .5rem;
+    font-size: 1rem;
+    list-style-type: none;
+    border-radius: 25px;
+    color: white;
+    text-Decoration: none;
+    margin: 1rem .5rem;
+}
+
+.confirmButton > a {
+    padding: .5rem;
+    font-size: 1rem;
+    list-style-type: none;
+    background-color: lawngreen;
+    border-radius: 25px;
+    color: white;
+    text-Decoration: none;
+    margin: 1rem .5rem;
+}
+
+
+/* mobile screens */
+@media screen and (max-width: 768px) {
+    .bottomButtonDiv {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+}
+
+/* desktop screens */
+@media screen and (min-width: 769px) {
+    .confirmDelete {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .bottomButtonDiv {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}
+

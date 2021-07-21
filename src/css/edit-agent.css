@@ -1,0 +1,50 @@
+.wrapper {
+    height: 25vh;
+    /*This part is important for centering*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.typing-demo-edit {
+    width: 20ch;
+    animation: typing 1.19s steps(22), blink .5s step-end infinite alternate;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 3px solid;
+    font-family: monospace;
+    font-size: 1.30rem;
+    color: black;
+}
+
+@keyframes typing {
+    from {
+        width: 0
+    }
+}
+
+@keyframes blink {
+    50% {
+        border-color: transparent
+    }
+}
+
+.backButton {
+    margin: 1rem;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.backButton > a {
+    padding: .5rem;
+    font-size: 1rem;
+    list-style-type: none;
+    background-color: #CFD11A;
+    border-radius: 25px;
+    color: white;
+    text-Decoration: none;
+    margin-bottom: 1rem;
+}
+
+
