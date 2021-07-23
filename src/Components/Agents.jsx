@@ -12,25 +12,29 @@ export default function Agents() {
     // const contextAgents = useContext(AgentsContext);
     const auth = useContext(AuthContext);
 
-    let [agents, setAgents] = useState();
+    let [agents, setAgents] = useState([]);
     const contextAgents = {agents, setAgents};
 
-    const getToDos = (token) => {
+    const getAgents = (token) => {
         const init = {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
         }
         // loading initial data for our component
-        fetch('http://localhost:8080/api/agents', init)
+        fetch('http://localhost:8080/api/agent', init)
             .then(response => response.json())
             .then(data => setAgents(data))
             .catch(error => console.log(error));
     };
 
     useEffect(() => {
-        getToDos(auth.user.token);
+        getAgents(auth.user.token);
     }, [auth.user.token]);
+
+    if(!agents){
+        return null
+    }
 
     return (
         <AgentsContext.Provider value={contextAgents}>
