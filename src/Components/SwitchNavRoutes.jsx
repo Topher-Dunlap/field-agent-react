@@ -1,5 +1,5 @@
-import React from 'react';
-import {Route, Switch} from 'react-router-dom';
+import React, {useContext} from 'react';
+import {Route, Switch, Redirect} from 'react-router-dom';
 import Registration from "./Registration";
 import UserLogin from "./UserLogin";
 import Agents from "./Agents";
@@ -8,8 +8,13 @@ import EditAgent from "./EditAgent";
 import DeleteAgent from "./DeleteAgent";
 import Home from "./Home";
 import NotFoundPage from "./NotFoundPage";
+import AuthContext from './AuthContext';
+
 
 export default function SwitchNavRoutes() {
+
+    const auth = useContext(AuthContext);
+
     return (
         <Switch>
             <Route
@@ -17,21 +22,21 @@ export default function SwitchNavRoutes() {
                 component={Home}
             />
             <Route
-                exact path='/agents'
-                component={Agents}
-            />
+                exact path='/agents'>
+                {auth.user ? (<Agents/>) : (<Redirect to='/login'/>)}
+            </Route>
             <Route
-                path='/agents/add'
-                component={AddAgent}
-            />
+                exact path='/agents/add'>
+                {auth.user ? (<AddAgent/>) : (<Redirect to='/login'/>)}
+            </Route>
             <Route
-                path='/agents/edit/:agent_id'
-                component={EditAgent}
-            />
+                exact path='/agents/edit/:agent_id'>
+                {auth.user ? (<EditAgent/>) : (<Redirect to='/login'/>)}
+            </Route>
             <Route
-                path='/agents/delete/:agent_id'
-                component={DeleteAgent}
-            />
+                exact path='/agents/delete/:agent_id'>
+                {auth.user ? (<DeleteAgent/>) : (<Redirect to='/login'/>)}
+            </Route>
             <Route
                 path='/login'
                 component={UserLogin}

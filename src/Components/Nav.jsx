@@ -1,12 +1,16 @@
-import React from "react";
+import React, {useContext} from "react";
 import NavListLinks from "./NavListLinks";
 import NavListIconLinks from './NavListIconLinks';
 import '../css/nav.css';
 import {faHome, faUserSecret} from "@fortawesome/free-solid-svg-icons";
+import AuthContext from "./AuthContext";
 
 export default function Nav() {
+
+    const auth = useContext(AuthContext);
+
     ///Map the Nav Links with data from filterOptions
-    const navRoutes = navOptions.map((routeData, idx) =>
+    const navRoutes = notLoggedInNav.map((routeData, idx) =>
         <NavListLinks
             key={idx}
             routeName={routeData.routeName}
@@ -15,7 +19,7 @@ export default function Nav() {
     )
 
     ///Map the Nav Links with data from filterOptions
-    const navRouteIcons = navRouteIconOptions.map((routeData, idx) =>
+    const navRouteIcons = loggedInNavRouteIconOptions.map((routeData, idx) =>
         <NavListIconLinks
             key={idx}
             iconClass={routeData.iconClass}
@@ -28,15 +32,34 @@ export default function Nav() {
     return(
         <nav className="topNav">
             <ul>
-                {navRouteIcons}
-                {navRoutes}
+                {!auth.user && (
+                    <>
+                        <NavListIconLinks
+                            iconClass="fa fa-home"
+                            icon={faHome}
+                            routePath="/"
+                        />
+                        {navRoutes}
+                    </>
+                )}
+                {auth.user && (
+                    <>
+                        {navRouteIcons}
+                    </>
+                )}
             </ul>
+            {auth.user && (
+                <div>
+                    <p>Hello {auth.user.username}!</p>
+                    <button onClick={() => auth.logout()} className="btn btn-primary">Logout</button>
+                </div>
+            )}
         </nav>
     )
 }
 
 //data used to populate nav Links
-const navOptions = [
+const notLoggedInNav = [
     {
         routeName: "Login",
         routePath: "/login"
@@ -47,7 +70,9 @@ const navOptions = [
     },
 ]
 
-const navRouteIconOptions = [
+
+
+const loggedInNavRouteIconOptions = [
     {
         routePath: "/",
         iconClass: "fa fa-home",

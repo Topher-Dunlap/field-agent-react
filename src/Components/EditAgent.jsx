@@ -5,13 +5,17 @@ import AgentsContext from "./AgentsContext";
 import DEFAULT_AGENT from "../default_values/default_agent";
 import '../css/edit-agent.css';
 import '../css/form.css';
+import AuthContext from "./AuthContext";
+import Errors from "./Errors";
 
 export default function EditAgent() {
     ///context for agents
     const {agents, setAgents} = useContext(AgentsContext);
+    const auth = useContext(AuthContext);
 
     ///agentToEdit State
     const [agentToEdit, setAgentToEdit] = useState(DEFAULT_AGENT);
+    const [errors, setErrors] = useState([]);
 
     //for redirect after submit
     let history = useHistory();
@@ -42,22 +46,56 @@ export default function EditAgent() {
     const editAgentFormSubmitHandler = (event) => {
         event.preventDefault();
 
-        const newAgent = { ...agentToEdit, agentId: agent_id }
+        // const updatedToDo = {
+        //     id: id,
+        //     description
+        // };
 
-        const newAgents = [...agents];
+        const init = {
+            method: 'PUT', // GET by default
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${auth.user.token}`
+            },
+            body: JSON.stringify(agentToEdit)
+        };
 
-        const newAgentIndex = newAgents.findIndex(agent => agent.agentId === agent_id);
+        fetch(`http://localhost:8080/api/agent/${agentToEdit.agentId}`, init)
+            .then(response => {
+                if (response.status === 204) {
+                    return null;
+                } else if (response.status === 400) {
+                    return response.json();
+                }
+                return Promise.reject('Something unexpected went wrong :)');
+            })
+            .then(data => {
+                if (!data) {
+                    // redirect the user back to the /agents route
+                    history.push('/agents');
+                } else {
+                    // we have errors to display
+                    setErrors(data);
+                }
+            })
+            .catch(error => console.log(error));
 
-        newAgents[newAgentIndex] = newAgent;
-
-        //update agent data with new agent
-        setAgents(newAgents);
-
-        //reset form state
-        resetForm();
-
-        //direct back to agents page
-        history.push("/agents");
+        // const newAgent = { ...agentToEdit, agentId: agent_id }
+        //
+        // const newAgents = [...agents];
+        //
+        // const newAgentIndex = newAgents.findIndex(agent => agent.agentId === agent_id);
+        //
+        // newAgents[newAgentIndex] = newAgent;
+        //
+        // //update agent data with new agent
+        // setAgents(newAgents);
+        //
+        // //reset form state
+        // resetForm();
+        //
+        // //direct back to agents page
+        // history.push("/agents");
     };
 
     if(!agentToEdit){
@@ -72,6 +110,7 @@ export default function EditAgent() {
                 </div>
             </div>
             <BackButton/>
+            <Errors errors={errors} />
             <form onSubmit={editAgentFormSubmitHandler}>
                 <ul className="form-style-1">
                     <li>

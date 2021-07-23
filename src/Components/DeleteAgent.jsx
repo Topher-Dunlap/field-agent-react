@@ -4,10 +4,13 @@ import '../css/delete-agent.css';
 import CancelButton from "./CancelButton";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCheck} from "@fortawesome/free-solid-svg-icons";
+import AuthContext from "./AuthContext";
 import AgentsContext from "./AgentsContext";
 
 export default function DeleteAgent() {
 
+    const auth = useContext(AuthContext);
+    ///context for agents
     const {agents, setAgents} = useContext(AgentsContext);
 
     //for redirect after submit
@@ -19,10 +22,25 @@ export default function DeleteAgent() {
 
     //delete agent
     function agentDeleteOnClick() {
-        setAgents(agents.filter(agent => agent.agentId !== agent_id));
+        const init = {
+            method: 'DELETE', // GET by default
+            headers: {
+                'Authorization': `Bearer ${auth.user.token}`
+            }
+        };
 
-        //direct back to agents page
-        history.push("/agents");
+        fetch(`http://localhost:8080/api/todos/${agent_id}`, init)
+            .then(response => {
+                if (response.status === 204) {
+                    // getToDos(auth.user.token);
+                    history.push("/agents");
+                } else if (response.status === 404) {
+                    Promise.reject(`Agent ID ${agent_id} not found`);
+                } else {
+                    Promise.reject('Something unexpected went wrong :)');
+                }
+            })
+            .catch(error => console.log(error));
     }
 
     //agent to delete data
