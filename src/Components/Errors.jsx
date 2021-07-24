@@ -1,4 +1,5 @@
 import React from 'react';
+import '../css/errors.css';
 
 export default function Errors({errors = []}) {
     if (errors.length === 0) {
@@ -6,7 +7,7 @@ export default function Errors({errors = []}) {
     }
 
     return (
-        <div className="alert alert-danger">
+        <div className="alert">
             <ul>
                 {errors.map(error => (
                     <li key={error}>{error}</li>

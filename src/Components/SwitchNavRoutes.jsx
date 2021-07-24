@@ -41,10 +41,10 @@ export default function SwitchNavRoutes() {
                 path='/login'
                 component={UserLogin}
             />
-            {/*<Route*/}
-            {/*    path='/register'*/}
-            {/*    component={Registration}*/}
-            {/*/>*/}
+            <Route
+                path='/register'
+                component={Registration}
+            />
             <Route
                 component={NotFoundPage}
             />

@@ -1,0 +1,10 @@
+.alert > ul > li {
+    color: red;
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+}
+
+.alert > ul {
+    padding: 0;
+}
