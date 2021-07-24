@@ -5,7 +5,7 @@ import SwitchNavRoutes from "./Components/SwitchNavRoutes";
 import ErrorBoundary from "./Components/ErrorBoundary";
 import './css/reset.css';
 import './css/main.css';
-import AgentData from "./default_values/data";
+// import AgentData from "./default_values/data";
 import DEFAULT_USER from "./default_values/default_user";
 import AgentsContext from "./Components/AgentsContext";
 import AuthContext from "./Components/AuthContext";
@@ -14,7 +14,7 @@ import jwt_decode from 'jwt-decode';
 function App() {
 
     const [user, setUser] = useState(null);
-    const [agents, setAgents] = useState(AgentData);
+    const [agents, setAgents] = useState([]);
     const [initialized, setInitialized] = useState(false);
     const contextAgents = {agents, setAgents};
 

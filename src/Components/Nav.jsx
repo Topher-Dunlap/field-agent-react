@@ -29,32 +29,36 @@ export default function Nav() {
         />
     )
 
-    return(
-        <nav className="topNav">
-            <ul>
-                {!auth.user && (
-                    <>
-                        <NavListIconLinks
-                            iconClass="fa fa-home"
-                            icon={faHome}
-                            routePath="/"
-                        />
-                        {navRoutes}
-                    </>
-                )}
-                {auth.user && (
-                    <>
-                        {navRouteIcons}
-                    </>
-                )}
-            </ul>
+    return (
+        <>
+            <nav className="topNav">
+                <ul>
+                    {!auth.user && (
+                        <>
+                            <NavListIconLinks
+                                iconClass="fa fa-home"
+                                icon={faHome}
+                                routePath="/"
+                            />
+                            {navRoutes}
+                        </>
+                    )}
+                    {auth.user && (
+                        <>
+                            {navRouteIcons}
+                            <li>
+                                <a onClick={() => auth.logout()} className="logout">Logout</a>
+                            </li>
+                        </>
+                    )}
+                </ul>
+            </nav>
             {auth.user && (
-                <div>
-                    <p>Hello {auth.user.username}!</p>
-                    <button onClick={() => auth.logout()} className="btn btn-primary">Logout</button>
+                <div className="greeting">
+                    <p>Hello, {auth.user.username}!</p>
                 </div>
             )}
-        </nav>
+        </>
     )
 }
 
@@ -69,7 +73,6 @@ const notLoggedInNav = [
         routePath: "/register"
     },
 ]
-
 
 
 const loggedInNavRouteIconOptions = [

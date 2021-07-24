@@ -4,16 +4,16 @@ import '../css/delete-agent.css';
 import CancelButton from "./CancelButton";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCheck} from "@fortawesome/free-solid-svg-icons";
+import AgentService from "../service/agent-service";
 import AuthContext from "./AuthContext";
 import AgentsContext from "./AgentsContext";
+import config from '../config'
 
 export default function DeleteAgent() {
 
     const auth = useContext(AuthContext);
-    ///context for agents
     const {agents, setAgents} = useContext(AgentsContext);
 
-    //for redirect after submit
     let history = useHistory();
 
     //agent_id from dynamic route
@@ -29,10 +29,10 @@ export default function DeleteAgent() {
             }
         };
 
-        fetch(`http://localhost:8080/api/todos/${agent_id}`, init)
+        fetch(`${config.API_ENDPOINT}/agent/${agent_id}`, init)
             .then(response => {
                 if (response.status === 204) {
-                    // getToDos(auth.user.token);
+                    AgentService.getAgents(auth.user.token, setAgents);
                     history.push("/agents");
                 } else if (response.status === 404) {
                     Promise.reject(`Agent ID ${agent_id} not found`);
@@ -66,7 +66,9 @@ export default function DeleteAgent() {
                     <div className="deleteAgentButtons">
                         <CancelButton className="cancelButton"/>
                         <div className="confirmButton">
-                            <Link onClick={agentDeleteOnClick}>
+                            <Link
+                                onClick={agentDeleteOnClick}
+                                to={'/agents'}>
                                 <FontAwesomeIcon icon={faCheck}/> Confirm
                             </Link>
                         </div>

@@ -1,5 +1,8 @@
 
-
+div > p{
+    color: white;
+    font-family: monospace;
+}
 
 /* mobile screens */
 @media screen and (max-width: 768px) {
@@ -15,7 +18,6 @@
     .topNav > ul > li {
         padding: .2rem;
     }
-
 }
 
 /* desktop screens */
@@ -47,5 +49,6 @@
     .topNav > nav > ul {
         display: flex;
     }
+
 }
 
