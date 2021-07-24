@@ -7,6 +7,7 @@ import '../css/edit-agent.css';
 import '../css/form.css';
 import AuthContext from "./AuthContext";
 import Errors from "./Errors";
+import config from '../config'
 
 export default function EditAgent() {
     ///context for agents
@@ -27,13 +28,11 @@ export default function EditAgent() {
     useEffect(() => {
         const editAgent = agents.find(agent => agent.agentId === agent_id);
         ///deep copy
-        const tempAgent = {...editAgent, agencies:[...editAgent.agencies], aliases:[...editAgent.aliases]}
+        // const tempAgent = {...editAgent, agencies:[...editAgent.agencies], aliases:[...editAgent.aliases]}
+        const tempAgent = {...editAgent}
+
         setAgentToEdit(tempAgent);
     }, [agent_id]);
-
-    const resetForm = () => {
-        setAgentToEdit(DEFAULT_AGENT);
-    };
 
     const editInputOnChangeHandler = (event) => {
         const nextAgent = { ...agentToEdit };
@@ -46,11 +45,6 @@ export default function EditAgent() {
     const editAgentFormSubmitHandler = (event) => {
         event.preventDefault();
 
-        // const updatedToDo = {
-        //     id: id,
-        //     description
-        // };
-
         const init = {
             method: 'PUT', // GET by default
             headers: {
@@ -60,7 +54,7 @@ export default function EditAgent() {
             body: JSON.stringify(agentToEdit)
         };
 
-        fetch(`http://localhost:8080/api/agent/${agentToEdit.agentId}`, init)
+        fetch(`${config.API_ENDPOINT}/agent/${agentToEdit.agentId}`, init)
             .then(response => {
                 if (response.status === 204) {
                     return null;
@@ -79,23 +73,6 @@ export default function EditAgent() {
                 }
             })
             .catch(error => console.log(error));
-
-        // const newAgent = { ...agentToEdit, agentId: agent_id }
-        //
-        // const newAgents = [...agents];
-        //
-        // const newAgentIndex = newAgents.findIndex(agent => agent.agentId === agent_id);
-        //
-        // newAgents[newAgentIndex] = newAgent;
-        //
-        // //update agent data with new agent
-        // setAgents(newAgents);
-        //
-        // //reset form state
-        // resetForm();
-        //
-        // //direct back to agents page
-        // history.push("/agents");
     };
 
     if(!agentToEdit){
@@ -125,25 +102,7 @@ export default function EditAgent() {
                     </li>
                     <li>
                         <label>Height (inches)<span className="required">*</span></label>
-                        <input type="text" name="height" className="field-long" value={agentToEdit.height} onChange={editInputOnChangeHandler}/>
-                    </li>
-                    <li>
-                        <label>Agency</label>
-                        <select name="agencies[0].shortName" className="field-select" onChange={editInputOnChangeHandler}>
-                            <option value="default">{agentToEdit.agencies[0].shortName}</option>
-                            <option value="Partnership">CIA</option>
-                            <option value="Partnership">Scotland Yard</option>
-                            <option value="General Question">MI6</option>
-                        </select>
-                    </li>
-                    <li>
-                        <label>Alias Name</label>
-                        <input type="text" name="aliases[0].name" className="field-divided" value={agentToEdit.aliases[0].name} onChange={editInputOnChangeHandler}/>
-                    </li>
-                    <li>
-                        <label>Alias Persona</label>
-                        <textarea name="aliases[0].persona" id="field5" className="field-long field-textarea"
-                                  value={agentToEdit.aliases[0].persona} onChange={editInputOnChangeHandler}/>
+                        <input type="text" name="height" className="field-long" value={agentToEdit.heightInInches} onChange={editInputOnChangeHandler}/>
                     </li>
                     <li>
                         <input className="buttonSubmit" type="submit" value="Submit Changes"/>

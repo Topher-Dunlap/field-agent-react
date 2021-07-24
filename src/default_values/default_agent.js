@@ -3,7 +3,7 @@ const DEFAULT_AGENT = {
     firstName: '',
     lastName: '',
     dob: '',
-    height: '',
+    heightInInches: '',
     agencies: [{shortName: ''}],
     aliases: [{
         name: '',

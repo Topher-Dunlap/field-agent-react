@@ -1,10 +1,10 @@
 import React from 'react';
 
-export default function AgentDataList({agentId, dob, height, agencies, aliases}){
+export default function AgentDataList({agentId, dob, heightInInches, agencies, aliases}){
     return(
         <ul>
             <li><label className="cardLabel">DOB: </label> {dob}</li>
-            <li><label className="cardLabel">Height: </label> {height}</li>
+            <li><label className="cardLabel">Height: </label> {heightInInches}</li>
             <li><label className="cardLabel">Agencies: </label>
                 <ul>
                     {agencies.map(a => (<li key={`${agentId}-${a.agencyId}`}>{a.shortName}</li>))}

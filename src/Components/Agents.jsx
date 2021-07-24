@@ -10,24 +10,9 @@ import AgentsContext from "./AgentsContext";
 
 export default function Agents() {
 
-    // const contextAgents = useContext(AgentsContext);
     const auth = useContext(AuthContext);
 
-    // let [agents, setAgents] = useState([]);
     const {agents, setAgents} = useContext(AgentsContext);
-
-    // const getAgents = (token) => {
-    //     const init = {
-    //         headers: {
-    //             'Authorization': `Bearer ${token}`
-    //         }
-    //     }
-    //     // loading initial data for our component
-    //     fetch('http://localhost:8080/api/agent', init)
-    //         .then(response => response.json())
-    //         .then(data => setAgents(data))
-    //         .catch(error => console.log(error));
-    // };
 
     useEffect(() => {
         AgentService.getAgents(auth.user.token, setAgents);
@@ -57,7 +42,7 @@ export default function Agents() {
                         firstName={agent.firstName}
                         lastName={agent.lastName}
                         dob={agent.dob}
-                        height={agent.height}
+                        heightInInches={agent.heightInInches}
                         agencies={agent.agencies}
                         aliases={agent.aliases}
                         />
