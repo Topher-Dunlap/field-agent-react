@@ -1,32 +1,53 @@
 import React, {useContext} from 'react';
+import {Link, useHistory, useParams} from "react-router-dom";
 import '../css/delete-agent.css';
 import CancelButton from "./CancelButton";
-import {Link, useHistory} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCheck} from "@fortawesome/free-solid-svg-icons";
+import AgentService from "../service/agent-service";
+import AuthContext from "./AuthContext";
 import AgentsContext from "./AgentsContext";
-import SelectAgentContext from "./SelectAgentContext";
+import config from '../config'
 
 export default function DeleteAgent() {
 
+    const auth = useContext(AuthContext);
     const {agents, setAgents} = useContext(AgentsContext);
-    const {agentToSelect, setAgentToSelect} = useContext(SelectAgentContext);
 
-    //agent to delete data
-    const agentToDelete = agents.filter(agent => agent.agentId === agentToSelect);
-
-    //for redirect after submit
     let history = useHistory();
+
+    //agent_id from dynamic route
+    let { agent_id } = useParams();
+    agent_id = parseInt(agent_id, 10);
 
     //delete agent
     function agentDeleteOnClick() {
-        setAgents(agents.filter(agent => agent.agentId !== agentToSelect));
+        const init = {
+            method: 'DELETE', // GET by default
+            headers: {
+                'Authorization': `Bearer ${auth.user.token}`
+            }
+        };
 
-        //reset select agent state
-        setAgentToSelect('');
+        fetch(`${config.API_ENDPOINT}/agent/${agent_id}`, init)
+            .then(response => {
+                if (response.status === 204) {
+                    AgentService.getAgents(auth.user.token, setAgents);
+                    history.push("/agents");
+                } else if (response.status === 404) {
+                    Promise.reject(`Agent ID ${agent_id} not found`);
+                } else {
+                    Promise.reject('Something unexpected went wrong :)');
+                }
+            })
+            .catch(error => console.log(error));
+    }
 
-        //direct back to agents page
-        history.push("/agents");
+    //agent to delete data
+    const agentToDelete = agents.find(agent => agent.agentId === agent_id);
+
+    if(!agentToDelete) {
+        return null;
     }
 
     return (
@@ -41,11 +62,13 @@ export default function DeleteAgent() {
             <main>
                 <div className="bottomButtonDiv">
                     <h3>Are you sure you want to delete?</h3>
-                    <h2>{agentToDelete[0].firstName} {agentToDelete[0].lastName}</h2>
+                    <h2>{agentToDelete.firstName} {agentToDelete.lastName}</h2>
                     <div className="deleteAgentButtons">
                         <CancelButton className="cancelButton"/>
                         <div className="confirmButton">
-                            <Link onClick={agentDeleteOnClick}>
+                            <Link
+                                onClick={agentDeleteOnClick}
+                                to={'/agents'}>
                                 <FontAwesomeIcon icon={faCheck}/> Confirm
                             </Link>
                         </div>

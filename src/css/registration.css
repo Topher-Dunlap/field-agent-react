@@ -6,7 +6,7 @@
     justify-content: center;
 }
 
-.typing-demo {
+.typing-demo-reg {
     width: 17ch;
     animation: typing 1.19s steps(22), blink .5s step-end infinite alternate;
     white-space: nowrap;
@@ -29,51 +29,9 @@
     }
 }
 
-nav {
-    background-color: #333333;
-}
-
-nav > ul {
-    margin: 1rem;
-    padding-left: 1em;
-    display: flex;
-    margin: 2rem;
-    padding-left: 0;
-    display: flex;
-    justify-content: center;
-    align-content: center;
-}
-
-nav > ul > li {
-    padding: 0.4rem;
-    list-style-type: none;
-    background-color: #333;
-}
-
-nav > ul > li > a {
-    border-radius: 25px;
-    color: #333333;
-}
-
-
-
 /* mobile screens */
 @media screen and (max-width: 768px) {
-    nav {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
 
-    nav > nav {
-        margin: 0 0 3rem 0;
-    }
-
-    .sideNavList {
-        text-align: center;
-        background-color: #AAAAAA;
-    }
 }
 
 

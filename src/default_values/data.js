@@ -3,7 +3,7 @@ const AgentData = [
         agentId: 1,
         firstName: "James",
         lastName: "Bond",
-        dob: "10/12/1961",
+        dob: "1961-12-10",
         height: "92",
         agencies: [
             {
@@ -31,7 +31,7 @@ const AgentData = [
         agentId: 2,
         firstName: "James",
         lastName: "Bono",
-        dob: "10/12/1966",
+        dob: "1966-10-20",
         height: "12",
         agencies: [
             {
@@ -59,7 +59,7 @@ const AgentData = [
         agentId: 3,
         firstName: "James",
         lastName: "Bondo",
-        dob: "10/12/1981",
+        dob: "1981-9-16",
         height: "78",
         agencies: [
             {
@@ -87,7 +87,7 @@ const AgentData = [
         agentId: 4,
         firstName: "James",
         lastName: "Dinklage",
-        dob: "10/12/1963",
+        dob: "1963-8-4",
         height: "76",
         agencies: [
             {

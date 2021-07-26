@@ -1,15 +1,26 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import AgentCard from "./AgentCard";
 import '../css/agents.css';
 import {Link} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlus} from "@fortawesome/free-solid-svg-icons";
+import AgentService from "../service/agent-service";
+import AuthContext from "./AuthContext";
 import AgentsContext from "./AgentsContext";
 
 export default function Agents() {
 
-    const contextAgents = useContext(AgentsContext);
-    let {agents, setAgents} = contextAgents;
+    const auth = useContext(AuthContext);
+
+    const {agents, setAgents} = useContext(AgentsContext);
+
+    useEffect(() => {
+        AgentService.getAgents(auth.user.token, setAgents);
+    }, [auth.user.token]);
+
+    if (!agents) {
+        return null
+    }
 
     return (
         <main>
@@ -19,7 +30,7 @@ export default function Agents() {
                 </div>
             </div>
             <div className="addButtonDiv">
-                <Link to={"/add_agent"}>
+                <Link to={"/agents/add"}>
                     <FontAwesomeIcon icon={faPlus}/> Add Agent
                 </Link>
             </div>
@@ -31,9 +42,10 @@ export default function Agents() {
                         firstName={agent.firstName}
                         lastName={agent.lastName}
                         dob={agent.dob}
-                        height={agent.height}
+                        heightInInches={agent.heightInInches}
                         agencies={agent.agencies}
-                        aliases={agent.aliases}/>
+                        aliases={agent.aliases}
+                        />
                 ))}
             </section>
         </main>
