@@ -3,6 +3,7 @@ import {useHistory} from "react-router-dom";
 import '../css/add-agent.css';
 import '../css/form.css';
 import AgentsContext from "./AgentsContext";
+import BackButton from "./BackButton";
 import DEFAULT_AGENT from "../default_values/default_agent";
 
 
@@ -51,6 +52,7 @@ export default function AddAgent() {
                     <h1>Add Agent.</h1>
                 </div>
             </div>
+            <BackButton/>
             <form onSubmit={addAgentFormSubmitHandler}>
                 <ul className="form-style-1">
                     <li>

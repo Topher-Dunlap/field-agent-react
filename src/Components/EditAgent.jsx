@@ -1,13 +1,13 @@
 import React, {useContext, useState, useEffect} from 'react';
 import {useHistory, useParams} from "react-router-dom";
-import BackButton from "./BackButton";
 import AgentsContext from "./AgentsContext";
 import DEFAULT_AGENT from "../default_values/default_agent";
+import AuthContext from "./AuthContext";
+import BackButton from "./BackButton";
+import Errors from "./Errors";
+import config from '../config';
 import '../css/edit-agent.css';
 import '../css/form.css';
-import AuthContext from "./AuthContext";
-import Errors from "./Errors";
-import config from '../config'
 
 export default function EditAgent() {
     ///context for agents
@@ -86,8 +86,8 @@ export default function EditAgent() {
                     <h1>Edit Agent.</h1>
                 </div>
             </div>
-            <BackButton/>
             <Errors errors={errors} />
+            <BackButton/>
             <form onSubmit={editAgentFormSubmitHandler}>
                 <ul className="form-style-1">
                     <li>
@@ -104,7 +104,7 @@ export default function EditAgent() {
                         <label>Height (inches)<span className="required">*</span></label>
                         <input type="text" name="height" className="field-long" value={agentToEdit.heightInInches} onChange={editInputOnChangeHandler}/>
                     </li>
-                    <li>
+                    <li className="editButtons">
                         <input className="buttonSubmit" type="submit" value="Submit Changes"/>
                     </li>
                 </ul>
